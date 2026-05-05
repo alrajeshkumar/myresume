@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rajeshkumar Lakshmanan &mdash; SAP Technical Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@200;300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ===== THEMES ============================================= */
+:root {
+  --ink:#050D18; --ink2:#091525; --ink3:#0d1e34;
+  --gold:#D4A843; --gold2:#F5CC6A; --gold3:#8B6914;
+  --teal:#1ECEC0; --teal2:#0A8A80;
+  --cream:#F0EAD6; --muted:#7A8FA8;
+  --glass:rgba(255,255,255,0.04); --glass2:rgba(255,255,255,0.08);
+  --border:rgba(212,168,67,0.22); --border2:rgba(212,168,67,0.48);
+  --card-bg:rgba(255,255,255,0.04);
+  --text-body:#c8d5e5; --text-head:#F0EAD6;
+  --shadow:rgba(0,0,0,0.5);
+  --nav-bg:rgba(5,13,24,0.93);
+  --section-alt:rgba(255,255,255,0.018);
+  --theme-icon:"☀";
+}
+html[data-theme="bright"] {
+  --ink:#f0f4fa; --ink2:#e2eaf5; --ink3:#d4e0f0;
+  --gold:#b5860a; --gold2:#9a6e04; --gold3:#e8a800;
+  --teal:#0a7a74; --teal2:#05504c;
+  --cream:#1a2a3a; --muted:#4a6080;
+  --glass:rgba(0,0,0,0.04); --glass2:rgba(0,0,0,0.07);
+  --border:rgba(0,80,140,0.22); --border2:rgba(0,80,140,0.42);
+  --card-bg:rgba(255,255,255,0.72);
+  --text-body:#2a3a50; --text-head:#0d1e34;
+  --shadow:rgba(0,50,120,0.18);
+  --nav-bg:rgba(240,244,250,0.95);
+  --section-alt:rgba(0,0,0,0.03);
+  --theme-icon:"🌙";
+}
+html[data-theme="elegant"] {
+  --ink:#13111a; --ink2:#1c1828; --ink3:#241f34;
+  --gold:#c9a0dc; --gold2:#e8c8f8; --gold3:#8a6aaa;
+  --teal:#7eb8c9; --teal2:#4a90a4;
+  --cream:#f0eaf8; --muted:#8a80aa;
+  --glass:rgba(255,255,255,0.05); --glass2:rgba(255,255,255,0.09);
+  --border:rgba(201,160,220,0.22); --border2:rgba(201,160,220,0.48);
+  --card-bg:rgba(255,255,255,0.05);
+  --text-body:#c8c0e0; --text-head:#f0eaf8;
+  --shadow:rgba(0,0,0,0.55);
+  --nav-bg:rgba(19,17,26,0.94);
+  --section-alt:rgba(255,255,255,0.025);
+  --theme-icon:"✦";
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--ink);color:var(--text-body);font-family:'Outfit',sans-serif;overflow-x:hidden;transition:background .4s,color .4s}
+body.has-mouse{cursor:none}
+::selection{background:var(--gold);color:var(--ink)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),var(--teal));border-radius:2px}
+
+/* CURSOR */
+#cdot,#cring{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);top:0;left:0;will-change:left,top}
+#cdot{width:8px;height:8px;background:var(--gold);transition:background .2s}
+#cring{width:36px;height:36px;border:1.5px solid rgba(212,168,67,0.55);transition:width .2s,height .2s,border-color .2s,background .2s}
+#cring.hov{width:54px;height:54px;border-color:var(--gold);background:rgba(212,168,67,0.06)}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:2000;box-shadow:0 0 8px var(--gold);transition:width .08s linear}
+
+/* THEME SWITCHER */
+.theme-bar{position:fixed;bottom:2rem;right:1.5rem;z-index:1100;display:flex;flex-direction:column;gap:.5rem;align-items:center}
+.t-btn{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-head);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 4px 20px var(--shadow)}
+.t-btn:hover,.t-btn.active{border-color:var(--gold);background:rgba(212,168,67,0.15);box-shadow:0 0 18px rgba(212,168,67,0.25)}
+.t-label{font-size:.55rem;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;border-bottom:1px solid transparent;transition:background .4s,box-shadow .4s,border-color .4s}
+nav.scrolled{background:var(--nav-bg);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);box-shadow:0 4px 40px var(--shadow)}
+.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;font-weight:900;color:var(--gold);text-decoration:none}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{color:var(--muted);font-size:.78rem;font-weight:500;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold2)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-pill{background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--ink);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.48rem 1.3rem;border-radius:100px;text-decoration:none;transition:box-shadow .3s,transform .2s;box-shadow:0 0 20px rgba(212,168,67,.25)}
+.nav-pill:hover{box-shadow:0 0 35px rgba(212,168,67,.5);transform:translateY(-2px)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--gold);transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{display:none;position:fixed;top:66px;left:0;right:0;z-index:999;background:var(--nav-bg);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:2rem 3rem;flex-direction:column;gap:1.2rem}
+.mob-menu.open{display:flex}
+.mob-menu a{color:var(--muted);text-decoration:none;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;padding:.3rem 0;border-bottom:1px solid var(--border)}
+.mob-menu a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.hero-glow-a{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 70%);top:50%;right:0%;transform:translateY(-50%);pointer-events:none;z-index:1}
+.hero-glow-b{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,206,192,.06) 0%,transparent 70%);bottom:5%;left:2%;pointer-events:none;z-index:1}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:7rem 3rem 4rem;width:100%;display:grid;grid-template-columns:1fr 380px;gap:5rem;align-items:center}
+.mono-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--teal);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.4rem;opacity:0;animation:fadeUp .5s .3s forwards;display:flex;align-items:center;gap:.8rem}
+.mono-tag::before{content:'';width:28px;height:1px;background:var(--teal);flex-shrink:0}
+.hero-left h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1.05;margin-bottom:1rem;opacity:0;animation:fadeUp .6s .5s forwards;color:var(--text-head)}
+.name-gold{color:var(--gold);display:block}
+.typewriter-wrap{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--muted);margin-bottom:2rem;min-height:1.5rem;opacity:0;animation:fadeUp .5s .8s forwards}
+#tw-text{color:var(--teal)}
+.cur-blink{animation:blink .7s step-end infinite;color:var(--gold)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-exp-live{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:rgba(30,206,192,.1);border:1px solid rgba(30,206,192,.25);color:var(--teal);padding:.4rem 1rem;border-radius:100px;display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.4rem;opacity:0;animation:fadeUp .5s .65s forwards}
+.exp-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(30,206,192,.4)}70%{box-shadow:0 0 0 6px rgba(30,206,192,0)}}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp .5s 1s forwards}
+.htag{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.22);color:var(--gold2);font-size:.68rem;font-weight:500;padding:.3rem .85rem;border-radius:100px;letter-spacing:.06em;transition:background .25s,border-color .25s,box-shadow .25s;cursor:default}
+.htag:hover{background:rgba(212,168,67,.2);border-color:var(--gold);box-shadow:0 0 12px rgba(212,168,67,.18)}
+.hero-contacts{display:flex;flex-direction:column;gap:.75rem;opacity:0;animation:fadeUp .5s 1.1s forwards}
+.hc{display:flex;align-items:center;gap:.85rem;color:var(--muted);font-size:.86rem;transition:color .2s;text-decoration:none}
+.hc:hover{color:var(--text-head)}
+.hc-icon{width:30px;height:30px;background:rgba(212,168,67,.09);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;transition:background .25s,border-color .25s}
+.hc:hover .hc-icon{background:rgba(212,168,67,.2);border-color:var(--gold)}
+
+/* LINKEDIN BADGE */
+.li-badge{display:flex;align-items:center;gap:.8rem;background:rgba(10,102,194,.12);border:1px solid rgba(10,102,194,.3);border-radius:10px;padding:.7rem 1rem;transition:background .25s,border-color .25s;text-decoration:none;margin-top:.3rem}
+.li-badge:hover{background:rgba(10,102,194,.2);border-color:rgba(10,102,194,.5)}
+.li-logo{width:26px;height:26px;background:#0a66c2;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#fff;font-family:Georgia,serif;flex-shrink:0}
+.li-info .li-name{font-size:.8rem;font-weight:700;color:var(--text-head)}
+.li-info .li-meta{font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.1rem}
+.li-conn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#0a66c2;background:rgba(10,102,194,.1);padding:.2rem .6rem;border-radius:100px;white-space:nowrap}
+
+/* PHOTO */
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:1.5rem;opacity:0;animation:fadeRight .7s .6s forwards}
+.photo-orbit{position:relative;width:280px;height:280px;flex-shrink:0}
+.o-ring{position:absolute;border-radius:50%;pointer-events:none}
+.o-ring-1{inset:-20px;border:1px solid rgba(212,168,67,.18);animation:spinRing 12s linear infinite}
+.o-ring-2{inset:-38px;border:1px dashed rgba(30,206,192,.14);animation:spinRing 22s linear infinite reverse}
+.o-ring-3{inset:-56px;border:1px solid rgba(212,168,67,.06);animation:spinRing 35s linear infinite}
+.o-dot-a{position:absolute;width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold);top:-4px;left:calc(50% - 4px)}
+.o-dot-b{position:absolute;width:6px;height:6px;background:var(--teal);border-radius:50%;box-shadow:0 0 8px var(--teal);bottom:-3px;right:calc(50% - 3px)}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.photo-frame{position:relative;z-index:1;width:280px;height:280px;border-radius:50%;overflow:hidden;background:linear-gradient(145deg,#0a1e36,#132640);border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(212,168,67,.12),0 0 60px rgba(212,168,67,.2),inset 0 0 40px rgba(212,168,67,.04);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:var(--gold)}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%}
+.exp-badge{background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--ink);font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;padding:.7rem 2rem;border-radius:100px;letter-spacing:.04em;box-shadow:0 4px 28px rgba(212,168,67,.3);white-space:nowrap;text-align:center}
+.cert-row{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:300px}
+.c-chip{background:rgba(30,206,192,.08);border:1px solid rgba(30,206,192,.2);color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.25rem .65rem;border-radius:4px;letter-spacing:.06em}
+
+/* STATS */
+.stats-bar{position:relative;padding:2.5rem 3rem;background:rgba(212,168,67,.025);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{text-align:center;padding:0 1.5rem;position:relative}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:var(--border)}
+.stat-n{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-l{font-size:.7rem;color:var(--muted);margin-top:.4rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* SECTIONS */
+.sec-wrap{padding:6rem 3rem}
+.sec-wrap.alt{background:var(--section-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sec-inner{max-width:1200px;margin:0 auto}
+.s-mono{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--teal);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.s-mono::before{content:'';width:22px;height:1px;background:var(--teal);flex-shrink:0}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:900;color:var(--text-head);line-height:1.1;margin-bottom:.4rem}
+.s-title span{color:var(--gold)}
+.s-sub{color:var(--muted);font-size:.9rem;margin-top:1.1rem;max-width:560px;line-height:1.75}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1.2rem;margin-top:3rem}
+.sk-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;cursor:default}
+.sk-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.sk-card:hover{border-color:rgba(212,168,67,.45);box-shadow:0 14px 45px var(--shadow),0 0 28px rgba(212,168,67,.09);transform:translateY(-5px)}
+.sk-card:hover::after{transform:scaleX(1)}
+.sk-icon{font-size:1.6rem;margin-bottom:.7rem;display:block}
+.sk-name{font-size:.84rem;font-weight:600;color:var(--text-head);letter-spacing:.03em;margin-bottom:.85rem}
+.sk-track{height:3px;background:rgba(128,128,128,.18);border-radius:2px;overflow:hidden}
+.sk-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.sk-pct{position:absolute;top:1.3rem;right:1.3rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--gold);opacity:0;transition:opacity .25s}
+.sk-card:hover .sk-pct{opacity:1}
+
+/* TIMELINE */
+.tl-wrap{margin-top:3.5rem;position:relative}
+.tl-spine-bg{position:absolute;left:176px;top:0;bottom:0;width:1px;background:rgba(128,128,128,.14)}
+.tl-spine-fill{position:absolute;left:176px;top:0;width:1px;height:0;background:linear-gradient(to bottom,var(--gold),var(--teal));z-index:1;transition:height 2.2s ease}
+.tl-entry{display:grid;grid-template-columns:176px 1fr;gap:2.5rem;margin-bottom:2.5rem;position:relative}
+.tl-meta{text-align:right;padding-top:.35rem;padding-right:1.8rem}
+.tl-period{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);line-height:1.6;letter-spacing:.04em}
+.tl-active-tag{display:inline-block;background:rgba(30,206,192,.12);border:1px solid rgba(30,206,192,.3);color:var(--teal);font-size:.58rem;font-family:'JetBrains Mono',monospace;padding:.15rem .5rem;border-radius:3px;margin-top:.35rem;letter-spacing:.07em}
+.tl-dot{position:absolute;left:170px;top:.55rem;width:13px;height:13px;border-radius:50%;background:var(--ink);border:2px solid var(--gold);z-index:2;transition:background .3s,box-shadow .3s}
+.tl-dot.live{background:var(--gold);box-shadow:0 0 0 4px rgba(212,168,67,.18),0 0 18px rgba(212,168,67,.35)}
+.tl-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.7rem 2rem;transition:border-color .3s,box-shadow .3s,transform .3s;position:relative;overflow:hidden}
+.tl-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--teal));transform:scaleY(0);transform-origin:top;transition:transform .4s}
+.tl-card:hover{border-color:var(--border2);box-shadow:0 10px 45px var(--shadow),0 0 35px rgba(212,168,67,.06);transform:translateX(5px)}
+.tl-card:hover::before{transform:scaleY(1)}
+.tl-co{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:var(--gold2);margin-bottom:.2rem}
+.tl-role{font-size:.78rem;color:var(--teal);font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.35rem}
+.tl-cl{font-size:.79rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic}
+.tl-li{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.tl-li li{font-size:.83rem;color:var(--text-body);padding-left:1.2rem;position:relative;line-height:1.6;transition:color .2s}
+.tl-li li::before{content:'\25B8';position:absolute;left:0;color:var(--gold);font-size:.7rem;top:.18rem}
+.tl-li li:hover{color:var(--text-head)}
+.tl-li li strong{color:var(--text-head);font-weight:600}
+.tl-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+.tl-chip{background:rgba(30,206,192,.08);border:1px solid rgba(30,206,192,.18);color:var(--teal);font-size:.62rem;padding:.2rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;transition:background .2s,border-color .2s}
+.tl-chip:hover{background:rgba(30,206,192,.18);border-color:var(--teal)}
+.tl-expand-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:.69rem;font-family:'JetBrains Mono',monospace;padding:.3rem .8rem;border-radius:5px;cursor:pointer;margin-top:.9rem;transition:border-color .25s,color .25s;letter-spacing:.06em;display:inline-block}
+.tl-expand-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tl-extra{display:none;padding-top:.8rem;border-top:1px solid var(--border);margin-top:.8rem}
+.tl-extra.open{display:block}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.3rem;margin-top:3rem}
+.cert-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;display:flex;gap:1.2rem;align-items:flex-start;transition:border-color .3s,box-shadow .3s,transform .3s;overflow:hidden;position:relative}
+.cert-card:hover{border-color:var(--border2);box-shadow:0 10px 40px var(--shadow),0 0 28px rgba(212,168,67,.07);transform:translateY(-4px)}
+.cert-ico{font-size:2rem;flex-shrink:0;margin-top:2px}
+.cert-name{font-size:.88rem;font-weight:700;color:var(--text-head);margin-bottom:.3rem}
+.cert-code{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--gold);letter-spacing:.06em}
+
+/* AWARDS FLIP */
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.3rem;margin-top:3rem}
+.flip-card{height:200px;-webkit-perspective:900px;perspective:900px;cursor:pointer}
+.flip-inner{width:100%;height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:-webkit-transform .65s cubic-bezier(.4,.2,.2,1);transition:transform .65s cubic-bezier(.4,.2,.2,1)}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;border-radius:14px;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.4rem;text-align:center;overflow:hidden}
+.flip-front{background:var(--card-bg)}
+.flip-front::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,168,67,.08),transparent 70%);pointer-events:none}
+.flip-back{background:linear-gradient(145deg,rgba(212,168,67,.1),rgba(30,206,192,.05));-webkit-transform:rotateY(180deg);transform:rotateY(180deg);border-color:var(--border2)}
+.aw-emoji{font-size:2.3rem;margin-bottom:.55rem}
+.aw-title{font-size:.86rem;font-weight:700;color:var(--gold2);margin-bottom:.22rem}
+.aw-org{font-size:.74rem;color:var(--muted)}
+.aw-presenter{font-size:.74rem;color:var(--text-head);line-height:1.55}
+.flip-hint{font-size:.58rem;color:var(--muted);margin-top:.55rem;font-family:'JetBrains Mono',monospace;letter-spacing:.07em}
+
+/* EDUCATION */
+.edu-list{display:flex;flex-direction:column;gap:1.1rem;margin-top:3rem}
+.edu-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.8rem;display:flex;align-items:center;gap:1.8rem;transition:border-color .3s,box-shadow .3s,transform .3s;overflow:hidden;position:relative}
+.edu-card:hover{border-color:var(--border2);box-shadow:0 8px 32px var(--shadow);transform:translateX(5px)}
+.edu-yr{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--teal);min-width:82px;text-align:center;background:rgba(30,206,192,.08);border:1px solid rgba(30,206,192,.2);padding:.55rem .4rem;border-radius:8px;line-height:1.55;flex-shrink:0}
+.edu-deg{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-head)}
+.edu-inst{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.edu-score{margin-left:auto;font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0}
+
+/* PERSONAL */
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1.1rem;margin-top:3rem}
+.p-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.4rem;display:flex;gap:.9rem;align-items:flex-start;transition:border-color .3s,transform .3s}
+.p-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.p-ico{width:34px;height:34px;background:rgba(212,168,67,.09);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.p-lbl{font-size:.67rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.22rem}
+.p-val{font-size:.88rem;color:var(--text-head);font-weight:500}
+.decl-box{margin-top:3rem;background:rgba(212,168,67,.03);border:1px solid var(--border);border-left:2px solid var(--gold);border-radius:12px;padding:2rem 2.4rem}
+.decl-text{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--muted);font-style:italic;line-height:1.85}
+.decl-sig{margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;color:var(--gold)}
+
+/* MCP FLOW DIAGRAM */
+.mcp-section{padding:6rem 3rem;background:linear-gradient(180deg,var(--ink2) 0%,var(--ink3) 100%);position:relative;overflow:hidden}
+.mcp-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(212,168,67,.04),transparent 70%);pointer-events:none}
+.mcp-inner{max-width:1100px;margin:0 auto;position:relative}
+.mcp-flow{display:flex;align-items:stretch;justify-content:center;gap:0;margin-top:3rem;flex-wrap:nowrap;overflow-x:auto;padding-bottom:1rem}
+.mcp-node{display:flex;flex-direction:column;align-items:center;min-width:130px;max-width:145px;position:relative;flex-shrink:0}
+.mcp-box{width:120px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1rem .8rem;text-align:center;position:relative;cursor:pointer;transition:all .35s;z-index:2}
+.mcp-box:hover{transform:translateY(-6px) scale(1.04);border-color:var(--gold);box-shadow:0 14px 40px var(--shadow),0 0 30px rgba(212,168,67,.15)}
+.mcp-box.active-node{border-color:var(--gold);box-shadow:0 0 25px rgba(212,168,67,.2);animation:nodeGlow 2s ease-in-out infinite}
+@keyframes nodeGlow{0%,100%{box-shadow:0 0 15px rgba(212,168,67,.2)}50%{box-shadow:0 0 35px rgba(212,168,67,.4)}}
+.mcp-icon{font-size:1.8rem;margin-bottom:.45rem;display:block}
+.mcp-label{font-size:.7rem;font-weight:700;color:var(--text-head);letter-spacing:.04em;line-height:1.3}
+.mcp-sub{font-size:.6rem;color:var(--muted);margin-top:.25rem;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;line-height:1.4}
+.mcp-conn{display:flex;align-items:center;justify-content:center;width:60px;flex-shrink:0;position:relative;z-index:1}
+.mcp-line{width:100%;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal));position:relative;overflow:visible}
+.mcp-line::before{content:'';position:absolute;top:50%;left:0;transform:translateY(-50%);width:0;height:2px;background:linear-gradient(90deg,rgba(212,168,67,.9),rgba(30,206,192,.9));animation:flowLine 2.5s ease-in-out infinite;box-shadow:0 0 6px var(--gold)}
+@keyframes flowLine{0%{width:0;left:0;opacity:1}70%{width:100%;left:0;opacity:1}100%{width:0;left:100%;opacity:0}}
+.mcp-arrow{position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid var(--teal);z-index:3}
+.mcp-tooltip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--ink2);border:1px solid var(--gold);border-radius:8px;padding:.6rem .9rem;font-size:.7rem;color:var(--text-head);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;box-shadow:0 8px 30px var(--shadow);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.mcp-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border-top:6px solid var(--gold);border-left:5px solid transparent;border-right:5px solid transparent}
+.mcp-box:hover .mcp-tooltip{opacity:1}
+.mcp-labels-row{display:flex;justify-content:center;gap:0;margin-top:.8rem;max-width:1100px}
+.mcp-step-label{min-width:130px;max-width:145px;text-align:center;font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;padding:0 .3rem;flex-shrink:0}
+.mcp-step-spacer{width:60px;flex-shrink:0}
+.mcp-packet{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.5rem;justify-content:center}
+.mcp-pkt{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.7rem 1.1rem;display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--text-body);transition:all .3s;cursor:default}
+.mcp-pkt:hover{border-color:var(--teal);color:var(--text-head);background:rgba(30,206,192,.07)}
+.mcp-pkt-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+
+/* FOOTER */
+footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 3rem;text-align:center}
+.ft-name{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:var(--gold);margin-bottom:.5rem}
+.ft-tag{font-size:.78rem;color:var(--muted);margin-bottom:2rem;font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.ft-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.ft-links a{color:var(--muted);font-size:.8rem;text-decoration:none;padding:.48rem 1.1rem;border:1px solid var(--border);border-radius:8px;transition:color .3s,border-color .3s,background .3s,box-shadow .3s;font-weight:500}
+.ft-links a:hover{color:var(--gold);border-color:var(--gold);background:rgba(212,168,67,.07);box-shadow:0 0 18px rgba(212,168,67,.14)}
+.ft-copy{font-size:.68rem;color:rgba(122,143,168,.3);font-family:'JetBrains Mono',monospace}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s cubic-bezier(.25,.8,.25,1)}
+.rv.show{opacity:1;transform:none}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-right{order:-1}
+  .mono-tag,.hero-contacts{justify-content:center}
+  .hero-tags{justify-content:center}
+  .tl-spine-bg,.tl-spine-fill{left:0}
+  .tl-dot{left:-6px}
+  .tl-entry{grid-template-columns:1fr;padding-left:20px}
+  .tl-meta{text-align:left;padding-right:0}
+  .nav-links,.nav-pill{display:none}
+  .hamburger{display:flex}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2)::before,.stat-item:nth-child(3)::before,.stat-item:nth-child(4)::before{display:none}
+  .stat-item{padding:1rem;border-bottom:1px solid var(--border)}
+  .mcp-flow{gap:0;padding:0 1rem 1rem}
+  .mcp-box{width:100px;min-width:100px}
+  .mcp-node{min-width:110px;max-width:120px}
+}
+@media(max-width:640px){
+  .mcp-flow{flex-direction:column;align-items:center;gap:0}
+  .mcp-node{flex-direction:row;min-width:unset;max-width:unset;width:100%;max-width:340px}
+  .mcp-box{width:140px;min-width:140px}
+  .mcp-conn{width:2px;height:40px;flex-direction:column;align-items:center}
+  .mcp-line{width:2px;height:100%;background:linear-gradient(180deg,var(--gold),var(--teal))}
+  .mcp-arrow{right:unset;bottom:-8px;top:unset;left:50%;transform:translateX(-50%) rotate(90deg)}
+  .mcp-line::before{width:2px;height:0;top:0;left:50%;transform:translateX(-50%);animation:flowLineV 2.5s ease-in-out infinite}
+  @keyframes flowLineV{0%{height:0;top:0;opacity:1}70%{height:100%;top:0;opacity:1}100%{height:0;top:100%;opacity:0}}
+}
+@media(max-width:480px){
+  .stats-inner{grid-template-columns:1fr}
+  .stat-item::before{display:none!important}
+  .sec-wrap,.hero-inner{padding-left:1.4rem;padding-right:1.4rem}
+  nav{padding:0 1.4rem}
+  .edu-card{flex-wrap:wrap}
+  .edu-score{margin-left:0}
+  .theme-bar{bottom:1rem;right:.8rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cdot"></div>
+<div id="cring"></div>
+<div id="prog"></div>
+
+<!-- THEME SWITCHER -->
+<div class="theme-bar" role="group" aria-label="Theme selector">
+  <button class="t-btn active" id="btn-dark" onclick="setTheme('dark')" title="Dark mode">&#127769;</button>
+  <button class="t-btn" id="btn-elegant" onclick="setTheme('elegant')" title="Elegant mode">&#10024;</button>
+  <button class="t-btn" id="btn-bright" onclick="setTheme('bright')" title="Bright mode">&#9728;</button>
+  <span class="t-label">theme</span>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">RL</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#mcp">SAP+AI</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#personal">Personal</a></li>
+  </ul>
+  <a href="Rajeshkumar_Resume_ATS_Styled.docx" download class="nav-pill">&#x2B07; Download CV</a>
+  <button class="hamburger" id="hbg" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="#skills" onclick="closeMob()">Skills</a>
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#mcp" onclick="closeMob()">SAP + AI (MCP)</a>
+  <a href="#certs" onclick="closeMob()">Certifications</a>
+  <a href="#awards" onclick="closeMob()">Awards</a>
+  <a href="#education" onclick="closeMob()">Education</a>
+  <a href="#personal" onclick="closeMob()">Personal</a>
+  <a href="Rajeshkumar_Resume_ATS_Styled.docx" download style="color:var(--gold)">&#x2B07; Download CV</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="mono-tag">SAP Technical Architect &middot; Manager</div>
+      <h1>Rajeshkumar<span class="name-gold">Lakshmanan</span></h1>
+      <div class="hero-exp-live"><span class="exp-dot"></span><span id="exp-live">Calculating...</span></div>
+      <div class="typewriter-wrap">// <span id="tw-text"></span><span class="cur-blink">&#x2588;</span></div>
+      <div class="hero-tags">
+        <span class="htag">S/4HANA</span><span class="htag">ABAP OO</span><span class="htag">OData</span>
+        <span class="htag">SAP BTP</span><span class="htag">Fiori / UI5</span><span class="htag">CDS &amp; AMDP</span>
+        <span class="htag">Apple Inc.</span><span class="htag">Cognizant</span><span class="htag" id="exp-tag">14+ Yrs</span>
+      </div>
+      <div class="hero-contacts">
+        <a class="hc" href="tel:+919790070844"><div class="hc-icon">&#128222;</div>+91-9790070844</a>
+        <a class="hc" href="mailto:l.rajeshkumar@outlook.com"><div class="hc-icon">&#9993;</div>l.rajeshkumar@outlook.com</a>
+        <a class="hc li-badge" href="https://linkedin.com/in/rajeshkumar-l" target="_blank" rel="noopener">
+          <div class="li-logo">in</div>
+          <div class="li-info">
+            <div class="li-name">Rajeshkumar Lakshmanan</div>
+            <div class="li-meta">Technical Architect &amp; Manager, Cognizant &middot; Chennai</div>
+          </div>
+          <span class="li-conn">394+ connections</span>
+        </a>
+        <a class="hc" href="https://credly.com/users/l.rajeshkumar" target="_blank" rel="noopener"><div class="hc-icon">&#127885;</div>credly.com/users/l.rajeshkumar</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-orbit">
+        <div class="o-ring o-ring-1"><div class="o-dot-a"></div></div>
+        <div class="o-ring o-ring-2"><div class="o-dot-b"></div></div>
+        <div class="o-ring o-ring-3"></div>
+        <div class="photo-frame" id="photoFrame">RL</div>
+      </div>
+      <div class="exp-badge" id="exp-badge">&#10022; 14+ Years of Excellence &#10022;</div>
+      <div class="cert-row">
+        <span class="c-chip">E_HANAW_17</span>
+        <span class="c-chip">C_FIORDEV_21</span>
+        <span class="c-chip">SAP BTP Architect</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar" id="statsbar">
+  <div class="stats-inner">
+    <div class="stat-item rv"><div class="stat-n" id="stat-exp">14+</div><div class="stat-l">Years Experience</div></div>
+    <div class="stat-item rv" style="transition-delay:.1s"><div class="stat-n" data-t="6" data-s="+">0</div><div class="stat-l">Fortune Clients</div></div>
+    <div class="stat-item rv" style="transition-delay:.2s"><div class="stat-n" data-t="5" data-s="+">0</div><div class="stat-l">Awards Won</div></div>
+    <div class="stat-item rv" style="transition-delay:.3s"><div class="stat-n" data-t="3" data-s="+">0</div><div class="stat-l">SAP Certifications</div></div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills"><div class="sec-wrap"><div class="sec-inner">
+  <div class="s-mono rv">Technical Expertise</div>
+  <h2 class="s-title rv">Core <span>Competencies</span></h2>
+  <p class="s-sub rv">A decade and a half across the full SAP technical stack &mdash; from classical ABAP to modern cloud-native S/4HANA development on BTP.</p>
+  <div class="skills-grid">
+    <div class="sk-card rv" style="transition-delay:.04s"><span class="sk-icon">&#9889;</span><div class="sk-name">ABAP Development</div><div class="sk-track"><div class="sk-fill" data-w="98"></div></div><div class="sk-pct">98%</div></div>
+    <div class="sk-card rv" style="transition-delay:.08s"><span class="sk-icon">&#128640;</span><div class="sk-name">S/4HANA Migration</div><div class="sk-track"><div class="sk-fill" data-w="95"></div></div><div class="sk-pct">95%</div></div>
+    <div class="sk-card rv" style="transition-delay:.12s"><span class="sk-icon">&#127758;</span><div class="sk-name">OData / REST APIs</div><div class="sk-track"><div class="sk-fill" data-w="92"></div></div><div class="sk-pct">92%</div></div>
+    <div class="sk-card rv" style="transition-delay:.16s"><span class="sk-icon">&#127912;</span><div class="sk-name">SAP Fiori / UI5</div><div class="sk-track"><div class="sk-fill" data-w="90"></div></div><div class="sk-pct">90%</div></div>
+    <div class="sk-card rv" style="transition-delay:.20s"><span class="sk-icon">&#128311;</span><div class="sk-name">CDS Views &amp; AMDP</div><div class="sk-track"><div class="sk-fill" data-w="88"></div></div><div class="sk-pct">88%</div></div>
+    <div class="sk-card rv" style="transition-delay:.24s"><span class="sk-icon">&#9729;</span><div class="sk-name">SAP BTP</div><div class="sk-track"><div class="sk-fill" data-w="85"></div></div><div class="sk-pct">85%</div></div>
+    <div class="sk-card rv" style="transition-delay:.28s"><span class="sk-icon">&#128279;</span><div class="sk-name">BAPI / RFC / BDC</div><div class="sk-track"><div class="sk-fill" data-w="98"></div></div><div class="sk-pct">98%</div></div>
+    <div class="sk-card rv" style="transition-delay:.32s"><span class="sk-icon">&#9881;</span><div class="sk-name">SAP Workflow</div><div class="sk-track"><div class="sk-fill" data-w="90"></div></div><div class="sk-pct">90%</div></div>
+    <div class="sk-card rv" style="transition-delay:.36s"><span class="sk-icon">&#128202;</span><div class="sk-name">ALV Reports</div><div class="sk-track"><div class="sk-fill" data-w="97"></div></div><div class="sk-pct">97%</div></div>
+    <div class="sk-card rv" style="transition-delay:.40s"><span class="sk-icon">&#128196;</span><div class="sk-name">Scripts &amp; Smartforms</div><div class="sk-track"><div class="sk-fill" data-w="95"></div></div><div class="sk-pct">95%</div></div>
+    <div class="sk-card rv" style="transition-delay:.44s"><span class="sk-icon">&#128268;</span><div class="sk-name">SAP PI/PO &amp; BODS</div><div class="sk-track"><div class="sk-fill" data-w="85"></div></div><div class="sk-pct">85%</div></div>
+    <div class="sk-card rv" style="transition-delay:.48s"><span class="sk-icon">&#128101;</span><div class="sk-name">Technical Leadership</div><div class="sk-track"><div class="sk-fill" data-w="93"></div></div><div class="sk-pct">93%</div></div>
+  </div>
+</div></div></div>
+
+<!-- EXPERIENCE -->
+<div id="experience"><div class="sec-wrap alt"><div class="sec-inner">
+  <div class="s-mono rv">Career Journey</div>
+  <h2 class="s-title rv">Professional <span>Experience</span></h2>
+  <p class="s-sub rv">High-impact SAP delivery for world-class clients across aerospace, retail, aviation MRO, infrastructure, and manufacturing verticals.</p>
+  <div class="tl-wrap">
+    <div class="tl-spine-bg"></div>
+    <div class="tl-spine-fill" id="splineFill"></div>
+    <div class="tl-entry rv">
+      <div class="tl-meta"><div class="tl-period">Mar 2023<br>Present</div><span class="tl-active-tag">&#x25CF; ACTIVE</span></div>
+      <div class="tl-dot live"></div>
+      <div class="tl-card">
+        <div class="tl-co">Cognizant Technology Solutions</div>
+        <div class="tl-role">SAP Technical Architect &mdash; Manager Projects</div>
+        <div class="tl-cl">Apple Inc. &mdash; iPhone &middot; iPad &middot; Mac &middot; iOS &middot; iCloud</div>
+        <ul class="tl-li">
+          <li><strong>World&#39;s Largest S/4HANA Migration:</strong> Spearheaded Apple&#39;s ECC-to-S/4 SLM project &mdash; recognized as the biggest S/4HANA migration globally.</li>
+          <li><strong>ACTF &ndash; Apple Care Task Force:</strong> End-to-end Order Management using OO-ABAP, OData &amp; UI5.</li>
+          <li><strong>CRU &ndash; Customer Replacement Unit:</strong> OData application with CDS and AMDP data models.</li>
+        </ul>
+        <button class="tl-expand-btn" onclick="toggleExtra(this)">+ Show More Details</button>
+        <div class="tl-extra">
+          <ul class="tl-li" style="margin-top:.5rem">
+            <li><strong>SEMS &ndash; Shipment Exception Mgmt:</strong> Neptune Design transformed to SAP OData/UI5 application.</li>
+            <li>Technical resourcing, feasibility analysis, architecture design &amp; team leadership.</li>
+          </ul>
+        </div>
+        <div class="tl-chips"><span class="tl-chip">S/4HANA</span><span class="tl-chip">OData</span><span class="tl-chip">CDS</span><span class="tl-chip">AMDP</span><span class="tl-chip">UI5</span><span class="tl-chip">OO-ABAP</span><span class="tl-chip">SLM Migration</span></div>
+      </div>
+    </div>
+    <div class="tl-entry rv">
+      <div class="tl-meta"><div class="tl-period">Jan 2022<br>Mar 2023</div></div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-co">Infosys Limited</div>
+        <div class="tl-role">Technology Architect</div>
+        <div class="tl-cl">Compass Group &mdash; World&#39;s 6th Largest Employer (Retail)</div>
+        <ul class="tl-li">
+          <li><strong>Enhancement:</strong> V_NLN report for pricing lists via ship-to-party and sold-to-party.</li>
+          <li><strong>HANA Upgrade:</strong> Led full upgrade from HANA 1909 to HANA 2021.</li>
+          <li><strong>Interface:</strong> Custom DMEE tree for BOA Bank payments; master data via PI/PO &amp; BODS.</li>
+          <li><strong>Fiori:</strong> Stock transfer posting app using BAPI_ACC_DOCUMENT_POST.</li>
+        </ul>
+        <div class="tl-chips"><span class="tl-chip">HANA Upgrade</span><span class="tl-chip">DMEE</span><span class="tl-chip">Fiori</span><span class="tl-chip">PI/PO</span><span class="tl-chip">BODS</span></div>
+      </div>
+    </div>
+    <div class="tl-entry rv">
+      <div class="tl-meta"><div class="tl-period">Sep 2015<br>Jan 2022</div></div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-co">Tata Consultancy Services</div>
+        <div class="tl-role">SAP Technical Consultant &mdash; Assistant Consultant</div>
+        <div class="tl-cl">Singapore Airlines &mdash; Skytrax World&#39;s Best Airline (MRO)</div>
+        <ul class="tl-li">
+          <li><strong>Performance Tuning:</strong> Revived a 15-year-old MRO-PM report to best-in-class performance.</li>
+          <li><strong>Dialog Programs:</strong> Physical Asset Verification (FI) + E-Invoice Workbench (SD) end-to-end.</li>
+          <li><strong>Fiori:</strong> Zero-defect Staff Travel Ticketing globally; My Inbox &amp; SBWP workflow integration.</li>
+        </ul>
+        <button class="tl-expand-btn" onclick="toggleExtra(this)">+ Show More Details</button>
+        <div class="tl-extra">
+          <ul class="tl-li" style="margin-top:.5rem">
+            <li><strong>Interfaces:</strong> ABAP Proxy for F110 payments; ICMS FI posting via SAP PI.</li>
+            <li><strong>Workflows:</strong> Vendor Master, Asset Verification, AP Invoice RPA &mdash; MRO-MM &amp; FICO.</li>
+          </ul>
+        </div>
+        <div class="tl-chips"><span class="tl-chip">MRO-MM</span><span class="tl-chip">SAP PI</span><span class="tl-chip">Fiori</span><span class="tl-chip">Workflow</span><span class="tl-chip">ABAP Proxy</span></div>
+      </div>
+    </div>
+    <div class="tl-entry rv">
+      <div class="tl-meta"><div class="tl-period">Apr 2013<br>Sep 2015</div></div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-co">Infoplus Technologies</div>
+        <div class="tl-role">SAP ABAP Technical Consultant</div>
+        <div class="tl-cl">GMR Group &mdash; Infrastructure Leader, Bangalore</div>
+        <ul class="tl-li">
+          <li>MIDAS (.NET) integration with SAP ECC6 via SAP.NETConnector 3.0 and standard BAPIs.</li>
+          <li>LSMWs and BDC for MM01, VA01 legacy migration; interactive ALV drill-down reports.</li>
+          <li>Web services for .NET third-party integration; Material Type and UOM configuration.</li>
+        </ul>
+        <div class="tl-chips"><span class="tl-chip">BAPI</span><span class="tl-chip">BDC</span><span class="tl-chip">LSMW</span><span class="tl-chip">Web Service</span><span class="tl-chip">ALV</span></div>
+      </div>
+    </div>
+    <div class="tl-entry rv">
+      <div class="tl-meta"><div class="tl-period">Aug 2011<br>Mar 2013</div></div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-co">Leonex Systems</div>
+        <div class="tl-role">SAP ABAP Consultant</div>
+        <div class="tl-cl">Vizag Steel Plant &middot; MSPL Limited (Manufacturing &amp; Mining)</div>
+        <ul class="tl-li">
+          <li>Material codification integration via SAP.NETConnector 3.0 and BAPI_MATERIAL_SAVEDATA.</li>
+          <li>Sales order / delivery ALV reports; SAP Script MEDRUCK for PO tax display.</li>
+          <li>LSMW/BDC conversions for MM01, VA01, XD01, XK01 from legacy systems.</li>
+        </ul>
+        <div class="tl-chips"><span class="tl-chip">ECC6</span><span class="tl-chip">BDC</span><span class="tl-chip">LSMW</span><span class="tl-chip">SAP Scripts</span><span class="tl-chip">BAPI</span></div>
+      </div>
+    </div>
+  </div>
+</div></div></div>
+
+<!-- SAP + AI / MCP FLOW -->
+<div id="mcp"><div class="mcp-section">
+  <div class="mcp-inner">
+    <div class="s-mono rv">Innovation &amp; Future</div>
+    <h2 class="s-title rv">SAP + Claude AI &mdash; <span>MCP Enhancement</span></h2>
+    <p class="s-sub rv">How SAP systems connect with Claude LLM via the Model Context Protocol (MCP) to deliver intelligent automation &mdash; an architectural blueprint for AI-powered enterprise enhancement.</p>
+    <div class="mcp-flow rv" id="mcpFlow">
+      <!-- Node 1: SAP System -->
+      <div class="mcp-node">
+        <div class="mcp-box active-node">
+          <div class="mcp-tooltip">SAP ECC / S/4HANA&#10;exposes BAPIs, RFMs, OData</div>
+          <span class="mcp-icon">&#128241;</span>
+          <div class="mcp-label">SAP System</div>
+          <div class="mcp-sub">ECC / S/4HANA<br>BTP</div>
+        </div>
+      </div>
+      <!-- Arrow 1 -->
+      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
+      <!-- Node 2: MCP Server -->
+      <div class="mcp-node">
+        <div class="mcp-box">
+          <div class="mcp-tooltip">MCP Server bridges SAP&#10;APIs with AI context protocol</div>
+          <span class="mcp-icon">&#128279;</span>
+          <div class="mcp-label">MCP Server</div>
+          <div class="mcp-sub">SAP Connector<br>Tool Registry</div>
+        </div>
+      </div>
+      <!-- Arrow 2 -->
+      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
+      <!-- Node 3: Claude LLM -->
+      <div class="mcp-node">
+        <div class="mcp-box active-node">
+          <div class="mcp-tooltip">Claude LLM reasons over&#10;SAP data &amp; executes tools</div>
+          <span class="mcp-icon">&#129302;</span>
+          <div class="mcp-label">Claude LLM</div>
+          <div class="mcp-sub">Anthropic<br>claude-sonnet</div>
+        </div>
+      </div>
+      <!-- Arrow 3 -->
+      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
+      <!-- Node 4: Tool Execution -->
+      <div class="mcp-node">
+        <div class="mcp-box">
+          <div class="mcp-tooltip">Claude calls SAP tools&#10;via MCP protocol (JSON-RPC)</div>
+          <span class="mcp-icon">&#9881;</span>
+          <div class="mcp-label">Tool Call</div>
+          <div class="mcp-sub">BAPI / OData<br>RFC / CDS</div>
+        </div>
+      </div>
+      <!-- Arrow 4 -->
+      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
+      <!-- Node 5: Enhancement -->
+      <div class="mcp-node">
+        <div class="mcp-box">
+          <div class="mcp-tooltip">AI-generated ABAP code&#10;or automated process output</div>
+          <span class="mcp-icon">&#128161;</span>
+          <div class="mcp-label">Enhancement</div>
+          <div class="mcp-sub">Auto-ABAP<br>Smart Process</div>
+        </div>
+      </div>
+      <!-- Arrow 5 -->
+      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
+      <!-- Node 6: SAP Output -->
+      <div class="mcp-node">
+        <div class="mcp-box active-node">
+          <div class="mcp-tooltip">Results flow back to SAP&#10;or end-user via Fiori / BTP</div>
+          <span class="mcp-icon">&#127919;</span>
+          <div class="mcp-label">SAP Output</div>
+          <div class="mcp-sub">Fiori / BTP<br>Automated</div>
+        </div>
+      </div>
+    </div>
+    <div class="mcp-packet rv">
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Natural language SAP queries via Claude</div>
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>AI-powered ABAP code generation</div>
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Intelligent BAPI / OData tool execution</div>
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Automated S/4HANA migration assist</div>
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>SAP Build Process Automation + LLM</div>
+      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>HANA vector embeddings for semantic search</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- CERTS -->
+<div id="certs"><div class="sec-wrap"><div class="sec-inner">
+  <div class="s-mono rv">Credentials</div>
+  <h2 class="s-title rv">SAP <span>Certifications</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card rv"><div class="cert-ico">&#127942;</div><div><div class="cert-name">SAP ABAP for HANA</div><div class="cert-code">E_HANAW_17 &middot; Global Certification</div></div></div>
+    <div class="cert-card rv" style="transition-delay:.1s"><div class="cert-ico">&#127919;</div><div><div class="cert-name">SAP Fiori Application Developer</div><div class="cert-code">C_FIORDEV_21 &middot; Development Associate</div></div></div>
+    <div class="cert-card rv" style="transition-delay:.2s"><div class="cert-ico">&#9729;</div><div><div class="cert-name">SAP BTP Solution Architect</div><div class="cert-code">Technology Architect Track</div></div></div>
+    <div class="cert-card rv" style="transition-delay:.3s"><div class="cert-ico">&#11088;</div><div><div class="cert-name">More Certifications</div><div class="cert-code">Full list on Credly profile</div></div></div>
+  </div>
+</div></div></div>
+
+<!-- AWARDS -->
+<div id="awards"><div class="sec-wrap alt"><div class="sec-inner">
+  <div class="s-mono rv">Recognition</div>
+  <h2 class="s-title rv">Awards &amp; <span>Honours</span></h2>
+  <p class="s-sub rv">Hover or tap each card to reveal who presented the award.</p>
+  <div class="awards-grid">
+    <div class="flip-card rv" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front"><div class="aw-emoji">&#11088;</div><div class="aw-title">Star of the Month</div><div class="aw-org">TCS &middot; 2016</div><div class="flip-hint">tap to reveal</div></div><div class="flip-face flip-back"><div class="aw-presenter">Presented by<br><strong>Mr. Shreeprasad Vartak</strong><br>Global Head &ndash; SAP Delivery, TCS</div></div></div></div>
+    <div class="flip-card rv" style="transition-delay:.1s" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front"><div class="aw-emoji">&#128640;</div><div class="aw-title">Beyond Call of Duty</div><div class="aw-org">TCS &middot; 2017</div><div class="flip-hint">tap to reveal</div></div><div class="flip-face flip-back"><div class="aw-presenter">Presented by<br><strong>Mr. Milind Kamble</strong><br>Head of Delivery &amp; Ops, APAC</div></div></div></div>
+    <div class="flip-card rv" style="transition-delay:.2s" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front"><div class="aw-emoji">&#127885;</div><div class="aw-title">Best Integration Project</div><div class="aw-org">TCS &middot; 2018</div><div class="flip-hint">tap to reveal</div></div><div class="flip-face flip-back"><div class="aw-presenter">Presented by<br><strong>Mr. Sanjay Gupta</strong><br>Country Head &ndash; TCS Singapore</div></div></div></div>
+    <div class="flip-card rv" style="transition-delay:.3s" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front"><div class="aw-emoji">&#128161;</div><div class="aw-title">Agile Workplace Transformation</div><div class="aw-org">TCS &middot; 2019</div><div class="flip-hint">tap to reveal</div></div><div class="flip-face flip-back"><div class="aw-presenter">Presented by<br><strong>Mrs. Fartima Ignatius</strong><br>Group Leader &ndash; APAC Travel &amp; Hospitality</div></div></div></div>
+    <div class="flip-card rv" style="transition-delay:.4s" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front"><div class="aw-emoji">&#127775;</div><div class="aw-title">Infosys RISE Award</div><div class="aw-org">Infosys &middot; 2022</div><div class="flip-hint">tap to reveal</div></div><div class="flip-face flip-back"><div class="aw-presenter">Presented by<br><strong>Mr. Amit Bakre</strong><br>Delivery Head &ndash; RCLSAP, Infosys</div></div></div></div>
+  </div>
+</div></div></div>
+
+<!-- EDUCATION -->
+<div id="education"><div class="sec-wrap"><div class="sec-inner">
+  <div class="s-mono rv">Academic Background</div>
+  <h2 class="s-title rv"><span>Education</span></h2>
+  <div class="edu-list">
+    <div class="edu-card rv"><div class="edu-yr">2005<br>2009</div><div><div class="edu-deg">Bachelor of Technology (B.Tech)</div><div class="edu-inst">Ganadipathy Tulsi&#39;s Jain Engineering College, Vellore &middot; Anna University</div></div><div class="edu-score">70%</div></div>
+    <div class="edu-card rv" style="transition-delay:.1s"><div class="edu-yr">2004<br>2005</div><div><div class="edu-deg">Higher Secondary (HSC)</div><div class="edu-inst">Thiruvalluvar Higher Secondary School</div></div><div class="edu-score">61%</div></div>
+    <div class="edu-card rv" style="transition-delay:.2s"><div class="edu-yr">2002<br>2003</div><div><div class="edu-deg">Secondary School (SSLC)</div><div class="edu-inst">Thiruvalluvar Higher Secondary School</div></div><div class="edu-score">58%</div></div>
+  </div>
+</div></div></div>
+
+<!-- PERSONAL -->
+<div id="personal"><div class="sec-wrap alt"><div class="sec-inner">
+  <div class="s-mono rv">Personal Details</div>
+  <h2 class="s-title rv">About <span>Me</span></h2>
+  <div class="p-grid">
+    <div class="p-card rv"><div class="p-ico">&#127874;</div><div><div class="p-lbl">Date of Birth</div><div class="p-val">24 August 1988</div></div></div>
+    <div class="p-card rv" style="transition-delay:.1s"><div class="p-ico">&#128100;</div><div><div class="p-lbl">Father&#39;s Name</div><div class="p-val">Mr. N. Lakshmanan</div></div></div>
+    <div class="p-card rv" style="transition-delay:.2s"><div class="p-ico">&#127961;</div><div><div class="p-lbl">Current Address</div><div class="p-val">261, 10th Street, Ganesh Avenue, Sakthi Nagar, Porur, Chennai</div></div></div>
+    <div class="p-card rv" style="transition-delay:.3s"><div class="p-ico">&#127968;</div><div><div class="p-lbl">Permanent Address</div><div class="p-val">59/40, Gudiyatham Road, Pallikonda, Vellore</div></div></div>
+  </div>
+  <div class="decl-box rv">
+    <div class="decl-text">&ldquo;I hereby declare that all the information furnished above is true and correct to the best of my knowledge and belief.&rdquo;</div>
+    <div class="decl-sig">&mdash; L. Rajeshkumar</div>
+  </div>
+</div></div></div>
+
+<footer>
+  <div class="ft-name">Rajeshkumar Lakshmanan</div>
+  <div class="ft-tag">SAP Technical Architect &middot; ABAP &middot; S/4HANA &middot; Fiori &middot; BTP</div>
+  <div class="ft-links">
+    <a href="mailto:l.rajeshkumar@outlook.com">&#9993; Email</a>
+    <a href="https://linkedin.com/in/rajeshkumar-l" target="_blank" rel="noopener">&#128279; LinkedIn</a>
+    <a href="https://credly.com/users/l.rajeshkumar" target="_blank" rel="noopener">&#127885; Credly</a>
+    <a href="Rajeshkumar_Resume_ATS_Styled.docx" download>&#x2B07; Download CV</a>
+  </div>
+  <div class="ft-copy">&copy; 2025 Rajeshkumar Lakshmanan &middot; All rights reserved</div>
+</footer>
+
+<script>
+(function() {
+  "use strict";
+
+  /* ── DYNAMIC EXPERIENCE CALCULATION ─────────────────── */
+  function calcExp() {
+    var start = new Date(2011, 7, 1); // August 1, 2011 (month is 0-indexed)
+    var now = new Date();
+    var ms = now - start;
+    var years = ms / (1000 * 60 * 60 * 24 * 365.25);
+    var yFull = Math.floor(years);
+    var mFull = Math.floor((years - yFull) * 12);
+    var display = yFull + "." + mFull + " yrs";
+    var badge = yFull + "+ Years of Excellence";
+    var live = yFull + " yrs " + mFull + " months active";
+    var tag = yFull + "." + mFull + " Yrs";
+    return { display: display, badge: badge, live: live, tag: tag, years: years, yFull: yFull };
+  }
+
+  var expData = calcExp();
+  var elLive = document.getElementById("exp-live");
+  var elBadge = document.getElementById("exp-badge");
+  var elTag = document.getElementById("exp-tag");
+  var elStatExp = document.getElementById("stat-exp");
+
+  if (elLive) elLive.textContent = expData.live;
+  if (elBadge) elBadge.textContent = "✦ " + expData.badge + " ✦";
+  if (elTag) elTag.textContent = expData.tag;
+
+  /* ── THEME ────────────────────────────────────────── */
+  function setTheme(t) {
+    document.documentElement.setAttribute("data-theme", t === "dark" ? "" : t);
+    var btns = document.querySelectorAll(".t-btn");
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+    var active = document.getElementById("btn-" + t);
+    if (active) active.classList.add("active");
+    try { localStorage.setItem("rl-theme", t); } catch(e) {}
+  }
+  window.setTheme = setTheme;
+  try {
+    var saved = localStorage.getItem("rl-theme");
+    if (saved) setTheme(saved);
+  } catch(e) {}
+
+  /* ── CURSOR ───────────────────────────────────────── */
+  var hasMouse = false;
+  var cdot = document.getElementById("cdot");
+  var cring = document.getElementById("cring");
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  window.addEventListener("mousemove", function onFirst() {
+    hasMouse = true;
+    document.body.classList.add("has-mouse");
+    window.removeEventListener("mousemove", onFirst);
+  }, { passive: true });
+
+  document.addEventListener("mousemove", function(e) {
+    mx = e.clientX; my = e.clientY;
+    cdot.style.left = mx + "px"; cdot.style.top = my + "px";
+  }, { passive: true });
+
+  function animC() {
+    rx += (mx - rx) * 0.17; ry += (my - ry) * 0.17;
+    cring.style.left = rx + "px"; cring.style.top = ry + "px";
+    requestAnimationFrame(animC);
+  }
+  animC();
+
+  var hovSels = "a,button,.sk-card,.flip-card,.tl-card,.cert-card,.edu-card,.p-card,.htag,.tl-expand-btn,.mcp-box,.t-btn";
+  var hovEls = document.querySelectorAll(hovSels);
+  for (var i = 0; i < hovEls.length; i++) {
+    (function(el) {
+      el.addEventListener("mouseenter", function() { cring.classList.add("hov"); });
+      el.addEventListener("mouseleave", function() { cring.classList.remove("hov"); });
+    })(hovEls[i]);
+  }
+
+  /* ── SCROLL PROGRESS ──────────────────────────────── */
+  var prog = document.getElementById("prog");
+  window.addEventListener("scroll", function() {
+    var pct = (window.pageYOffset / (document.body.scrollHeight - window.innerHeight)) * 100;
+    prog.style.width = pct + "%";
+  }, { passive: true });
+
+  /* ── NAV ──────────────────────────────────────────── */
+  var nav = document.getElementById("nav");
+  var secIds = ["hero","skills","experience","mcp","certs","awards","education","personal"];
+  var navLinks = document.querySelectorAll(".nav-links a");
+  window.addEventListener("scroll", function() {
+    nav.classList.toggle("scrolled", window.pageYOffset > 50);
+    var cur = "hero";
+    for (var j = 0; j < secIds.length; j++) {
+      var el = document.getElementById(secIds[j]);
+      if (el && window.pageYOffset >= el.offsetTop - 140) cur = secIds[j];
+    }
+    for (var k = 0; k < navLinks.length; k++) {
+      navLinks[k].classList.toggle("active", navLinks[k].getAttribute("href") === "#" + cur);
+    }
+  }, { passive: true });
+
+  /* ── HAMBURGER ────────────────────────────────────── */
+  var hbg = document.getElementById("hbg");
+  var mob = document.getElementById("mob");
+  hbg.addEventListener("click", function() {
+    hbg.classList.toggle("open"); mob.classList.toggle("open");
+  });
+  window.closeMob = function() {
+    hbg.classList.remove("open"); mob.classList.remove("open");
+  };
+
+  /* ── TYPEWRITER ───────────────────────────────────── */
+  var phrases = [
+    "SAP Technical Architect",
+    "ABAP & S/4HANA Expert",
+    "Fiori & CDS Developer",
+    expData.display + " of Excellence",
+    "Leading Apple SLM Migration",
+    "SAP + AI via MCP Protocol"
+  ];
+  var pi = 0, ci = 0, del = false;
+  var tw = document.getElementById("tw-text");
+  function type() {
+    var phrase = phrases[pi];
+    if (!del) {
+      ci++;
+      tw.textContent = phrase.slice(0, ci);
+      if (ci === phrase.length) { del = true; setTimeout(type, 2000); return; }
+    } else {
+      ci--;
+      tw.textContent = phrase.slice(0, ci);
+      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, del ? 48 : 88);
+  }
+  setTimeout(type, 1600);
+
+  /* ── HERO CANVAS ──────────────────────────────────── */
+  var canvas = document.getElementById("hero-canvas");
+  var ctx = canvas.getContext("2d");
+  var CW, CH, ptcls = [];
+
+  function resizeC() {
+    CW = canvas.width = canvas.parentElement.offsetWidth;
+    CH = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  resizeC();
+  window.addEventListener("resize", function() { resizeC(); initP(); }, { passive: true });
+
+  function Ptcl() { this.reset(); }
+  Ptcl.prototype.reset = function() {
+    this.x = Math.random() * CW; this.y = Math.random() * CH;
+    this.vx = (Math.random() - 0.5) * 0.38; this.vy = (Math.random() - 0.5) * 0.38;
+    this.r = Math.random() * 1.6 + 0.4; this.a = Math.random() * 0.55 + 0.1;
+    this.gold = Math.random() > 0.55;
+  };
+  Ptcl.prototype.update = function() {
+    this.x += this.vx + (mx / (CW || 1) - 0.5) * 0.25;
+    this.y += this.vy + (my / (CH || 1) - 0.5) * 0.25;
+    if (this.x < 0 || this.x > CW || this.y < 0 || this.y > CH) this.reset();
+  };
+  Ptcl.prototype.draw = function() {
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, 6.2832);
+    ctx.fillStyle = this.gold ? "rgba(212,168,67," + this.a + ")" : "rgba(30,206,192," + this.a + ")";
+    ctx.fill();
+  };
+
+  function initP() { ptcls = []; for (var n = 0; n < 110; n++) ptcls.push(new Ptcl()); }
+  initP();
+
+  function frame() {
+    ctx.clearRect(0, 0, CW, CH);
+    for (var a = 0; a < ptcls.length; a++) {
+      ptcls[a].update(); ptcls[a].draw();
+      for (var b = a + 1; b < ptcls.length; b++) {
+        var dx = ptcls[a].x - ptcls[b].x, dy = ptcls[a].y - ptcls[b].y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 95) {
+          ctx.beginPath(); ctx.moveTo(ptcls[a].x, ptcls[a].y); ctx.lineTo(ptcls[b].x, ptcls[b].y);
+          ctx.strokeStyle = "rgba(212,168,67," + (1 - d / 95) * 0.2 + ")";
+          ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  /* ── SCROLL REVEAL ────────────────────────────────── */
+  var rvEls = document.querySelectorAll(".rv");
+  function checkRv() {
+    var wH = window.innerHeight;
+    for (var n = 0; n < rvEls.length; n++) {
+      var r = rvEls[n].getBoundingClientRect();
+      if (r.top < wH * 0.92) {
+        rvEls[n].classList.add("show");
+        var bars = rvEls[n].querySelectorAll(".sk-fill");
+        if (bars.length) {
+          (function(bArr) {
+            setTimeout(function() {
+              for (var b = 0; b < bArr.length; b++) bArr[b].style.width = bArr[b].getAttribute("data-w") + "%";
+            }, 250);
+          })(bars);
+        }
+      }
+    }
+  }
+  window.addEventListener("scroll", checkRv, { passive: true });
+  window.addEventListener("resize", checkRv, { passive: true });
+  setTimeout(checkRv, 200);
+
+  /* ── COUNTERS ─────────────────────────────────────── */
+  var cntEls = document.querySelectorAll(".stat-n[data-t]");
+  var cntDone = false;
+  function runCnt() {
+    if (cntDone) return;
+    var sb = document.getElementById("statsbar");
+    if (!sb) return;
+    var r = sb.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.9) {
+      cntDone = true;
+      /* animate exp stat separately */
+      var expStat = document.getElementById("stat-exp");
+      if (expStat) {
+        var eTarget = expData.years;
+        var eCur = 0;
+        var eStep = eTarget / 44;
+        var eTimer = setInterval(function() {
+          eCur = Math.min(eCur + eStep, eTarget);
+          var yy = Math.floor(eCur);
+          var mm = Math.floor((eCur - yy) * 12);
+          expStat.textContent = yy + "." + mm + "+";
+          if (eCur >= eTarget) clearInterval(eTimer);
+        }, 35);
+      }
+      for (var i = 0; i < cntEls.length; i++) {
+        (function(el) {
+          var t = parseFloat(el.getAttribute("data-t"));
+          var s = el.getAttribute("data-s") || "+";
+          var cur = 0; var step = t / 44;
+          var timer = setInterval(function() {
+            cur = Math.min(cur + step, t);
+            el.textContent = Math.floor(cur) + (cur >= t ? s : "");
+            if (cur >= t) clearInterval(timer);
+          }, 35);
+        })(cntEls[i]);
+      }
+    }
+  }
+  window.addEventListener("scroll", runCnt, { passive: true });
+  setTimeout(runCnt, 300);
+
+  /* ── TIMELINE SPINE ───────────────────────────────── */
+  var spineFill = document.getElementById("splineFill");
+  var tlWrap = document.querySelector(".tl-wrap");
+  var spineDone = false;
+  function checkSpine() {
+    if (spineDone || !tlWrap || !spineFill) return;
+    var r = tlWrap.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.85) {
+      spineDone = true;
+      spineFill.style.height = tlWrap.offsetHeight + "px";
+    }
+  }
+  window.addEventListener("scroll", checkSpine, { passive: true });
+  setTimeout(checkSpine, 400);
+
+  /* ── EXPAND/COLLAPSE ──────────────────────────────── */
+  window.toggleExtra = function(btn) {
+    var extra = btn.nextElementSibling;
+    if (extra) {
+      extra.classList.toggle("open");
+      btn.textContent = extra.classList.contains("open") ? "- Hide Details" : "+ Show More Details";
+    }
+  };
+
+  /* ── MCP FLOW STAGGER ─────────────────────────────── */
+  var mcpBoxes = document.querySelectorAll(".mcp-box");
+  for (var m = 0; m < mcpBoxes.length; m++) {
+    mcpBoxes[m].style.opacity = "0";
+    mcpBoxes[m].style.transform = "translateY(20px)";
+    mcpBoxes[m].style.transition = "opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s";
+  }
+  var mcpDone = false;
+  function checkMcp() {
+    if (mcpDone) return;
+    var mcpSec = document.getElementById("mcp");
+    if (!mcpSec) return;
+    var r = mcpSec.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.85) {
+      mcpDone = true;
+      for (var n = 0; n < mcpBoxes.length; n++) {
+        (function(el, idx) {
+          setTimeout(function() {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+          }, idx * 180);
+        })(mcpBoxes[n], n);
+      }
+    }
+  }
+  window.addEventListener("scroll", checkMcp, { passive: true });
+  setTimeout(checkMcp, 500);
+
+})();
+</script>
+</body>
+</html>
