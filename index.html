@@ -333,6 +333,144 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   .edu-score{margin-left:0}
   .theme-bar{bottom:1rem;right:.8rem}
 }
+
+/* ===== PDF / PRINT STYLES ====================================
+   Open file in browser → click Download PDF → browser print dialog
+   → choose "Save as PDF" → clean white professional output
+================================================================ */
+@media print {
+  @page{margin:13mm 11mm;size:A4}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;animation:none!important;transition:none!important}
+  html,body{background:#fff!important;color:#1a1a2e!important;font-size:11.5px!important;cursor:default!important}
+  body.has-mouse{cursor:default!important}
+  /* hide interactive/decorative elements */
+  #cdot,#cring,#prog,nav,.mob-menu,.theme-bar,
+  #hero-canvas,.hero-glow-a,.hero-glow-b,
+  .o-ring,.o-dot-a,.o-dot-b,
+  .tl-expand-btn,.flip-hint,.mcp-conn,.mcp-tip,
+  .tl-spine-fill,.tl-spine-bg,.exp-dot,.cur-blink{display:none!important}
+  /* ── HERO ── */
+  .hero{min-height:auto!important;background:#fff!important;padding:0!important}
+  .hero-inner{display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:1.5rem!important;padding:.8rem 0 1.2rem!important;border-bottom:2px solid #D4A843!important}
+  .hero-left h1{font-size:2rem!important;color:#1a1a2e!important;animation:none!important;opacity:1!important}
+  .name-gold{color:#D4A843!important}
+  .mono-tag{opacity:1!important;animation:none!important;color:#0A8A80!important;font-size:.62rem!important}
+  .mono-tag::before{background:#0A8A80!important}
+  .hero-exp-live{opacity:1!important;animation:none!important;background:rgba(10,138,128,.1)!important;border:1px solid rgba(10,138,128,.3)!important;color:#0A8A80!important;font-size:.65rem!important}
+  .typewriter-wrap{opacity:1!important;animation:none!important;color:#555!important;font-size:.72rem!important;margin-bottom:1rem!important}
+  #tw-text::after{content:""!important}
+  .hero-tags{opacity:1!important;animation:none!important;margin-bottom:1rem!important}
+  .htag{background:#fff8e8!important;border:1px solid #D4A843!important;color:#8B6914!important;font-size:.6rem!important}
+  .hero-contacts{opacity:1!important;animation:none!important}
+  .hc{color:#333!important;font-size:.75rem!important}
+  .hc-icon{background:#fff8e8!important;border-color:#D4A843!important;width:22px!important;height:22px!important;font-size:.7rem!important}
+  .li-badge{background:#e8f0fb!important;border:1px solid rgba(10,102,194,.35)!important;padding:.5rem .7rem!important}
+  .li-name{color:#1a1a2e!important;font-size:.72rem!important}
+  .li-meta,.li-conn{font-size:.6rem!important;color:#555!important}
+  .li-conn{background:#e8f0fb!important;color:#0a66c2!important}
+  /* ── PHOTO ── */
+  .hero-right{opacity:1!important;animation:none!important;gap:.8rem!important}
+  .photo-orbit{width:120px!important;height:120px!important}
+  .photo-frame{width:120px!important;height:120px!important;font-size:2.2rem!important;border:2px solid #D4A843!important;box-shadow:none!important;background:#f0f4f8!important;color:#D4A843!important}
+  .exp-badge{font-size:.65rem!important;padding:.35rem .9rem!important;background:linear-gradient(135deg,#D4A843,#8B6914)!important;color:#fff!important;box-shadow:none!important}
+  .c-chip{background:#e8f8f7!important;border:1px solid #0A8A80!important;color:#0A8A80!important;font-size:.55rem!important}
+  /* ── STATS ── */
+  .stats-bar{background:#f8f4ec!important;padding:1rem 0!important;border-color:#D4A843!important}
+  .stats-inner{gap:0!important}
+  .stat-n{font-size:1.7rem!important;-webkit-text-fill-color:unset!important;color:#D4A843!important;background:none!important}
+  .stat-l{color:#555!important;font-size:.6rem!important}
+  .stat-item::before{background:#D4A843!important;-webkit-print-color-adjust:exact!important}
+  /* ── SECTIONS ── */
+  .sec-wrap{padding:1rem 0!important}
+  .sec-wrap.alt{background:#f9f9fb!important;padding:1rem 0!important;border-color:#ddd!important}
+  .s-mono{color:#0A8A80!important;font-size:.58rem!important}
+  .s-mono::before{background:#0A8A80!important}
+  .s-title{font-size:1.2rem!important;color:#1a1a2e!important}
+  .s-title span{color:#D4A843!important}
+  .s-sub{color:#555!important;font-size:.72rem!important;margin-top:.5rem!important}
+  /* ── SKILLS ── */
+  .skills-grid{grid-template-columns:repeat(4,1fr)!important;gap:.5rem!important;margin-top:.8rem!important}
+  .sk-card{background:#f9f9fb!important;border:1px solid #ddd!important;padding:.7rem!important;transform:none!important;box-shadow:none!important;break-inside:avoid}
+  .sk-card::after{display:none!important}
+  .sk-icon{font-size:1rem!important;margin-bottom:.25rem!important}
+  .sk-name{color:#1a1a2e!important;font-size:.65rem!important;margin-bottom:.35rem!important}
+  .sk-track{background:#e5e5e5!important}
+  .sk-fill{background:linear-gradient(90deg,#D4A843,#0A8A80)!important}
+  .sk-pct{opacity:1!important;color:#8B6914!important;font-size:.55rem!important}
+  /* ── TIMELINE ── */
+  .tl-entry{grid-template-columns:130px 1fr!important;gap:.8rem!important;margin-bottom:.9rem!important;page-break-inside:avoid}
+  .tl-meta{padding-right:1rem!important}
+  .tl-period{color:#555!important;font-size:.6rem!important}
+  .tl-active-tag{background:#e8f8f7!important;border-color:#0A8A80!important;color:#0A8A80!important;font-size:.52rem!important}
+  .tl-dot{left:124px!important;background:#D4A843!important;border-color:#D4A843!important;box-shadow:none!important}
+  .tl-dot.live{background:#D4A843!important}
+  .tl-card{background:#f9f9fb!important;border:1px solid #e0e0e0!important;border-left:3px solid #D4A843!important;padding:.9rem 1.1rem!important;transform:none!important;box-shadow:none!important}
+  .tl-card::before{display:none!important}
+  .tl-co{font-size:.95rem!important;color:#D4A843!important}
+  .tl-role{color:#0A8A80!important;font-size:.6rem!important}
+  .tl-cl{color:#555!important;font-size:.65rem!important}
+  .tl-li li{color:#333!important;font-size:.68rem!important}
+  .tl-li li::before{color:#D4A843!important}
+  .tl-li li strong{color:#1a1a2e!important}
+  .tl-chips{margin-top:.6rem!important}
+  .tl-chip{background:#e8f8f7!important;border-color:#0A8A80!important;color:#0A8A80!important;font-size:.52rem!important}
+  .tl-extra{display:block!important}
+  /* ── CERTS ── */
+  .cert-grid{grid-template-columns:repeat(2,1fr)!important;gap:.6rem!important;margin-top:.8rem!important}
+  .cert-card{background:#f9f9fb!important;border:1px solid #ddd!important;padding:.9rem!important;transform:none!important;break-inside:avoid}
+  .cert-ico{font-size:1.5rem!important}
+  .cert-name{color:#1a1a2e!important;font-size:.75rem!important}
+  .cert-code{color:#D4A843!important;font-size:.6rem!important}
+  /* ── AWARDS ── */
+  .awards-grid{grid-template-columns:repeat(3,1fr)!important;gap:.6rem!important;margin-top:.8rem!important}
+  .flip-card{height:auto!important;-webkit-perspective:none!important;perspective:none!important;cursor:default!important}
+  .flip-inner{-webkit-transform:none!important;transform:none!important;-webkit-transform-style:flat!important;transform-style:flat!important}
+  .flip-front{position:static!important;-webkit-backface-visibility:visible!important;backface-visibility:visible!important;background:#f9f9fb!important;border:1px solid #ddd!important;border-radius:8px!important;padding:.8rem!important}
+  .flip-front::before{display:none!important}
+  .flip-back{display:none!important}
+  .aw-emoji{font-size:1.4rem!important;margin-bottom:.3rem!important}
+  .aw-title{color:#D4A843!important;font-size:.72rem!important}
+  .aw-org{color:#555!important;font-size:.62rem!important}
+  /* ── MCP ── */
+  .mcp-section{background:#f0f4f8!important;padding:1rem 0!important}
+  .mcp-section::before{display:none!important}
+  .mcp-flow{flex-wrap:wrap!important;gap:.8rem!important;justify-content:flex-start!important;overflow:visible!important;margin-top:1rem!important}
+  .mcp-node{min-width:95px!important;max-width:108px!important}
+  .mcp-box{width:95px!important;background:#fff!important;border:1px solid #D4A843!important;padding:.6rem .4rem!important;transform:none!important;box-shadow:none!important;animation:none!important}
+  .mcp-box.anod{background:#fff8e8!important;box-shadow:none!important;animation:none!important}
+  .mcp-icon{font-size:1.2rem!important}
+  .mcp-label{color:#1a1a2e!important;font-size:.58rem!important}
+  .mcp-sub{color:#555!important;font-size:.5rem!important}
+  .mcp-packet{gap:.5rem!important;margin-top:.8rem!important;flex-wrap:wrap!important}
+  .mcp-pkt{background:#fff!important;border:1px solid #ddd!important;padding:.35rem .65rem!important;font-size:.6rem!important;color:#333!important;break-inside:avoid}
+  .mcp-pkt-dot{background:#0A8A80!important;box-shadow:none!important;animation:none!important}
+  /* ── EDUCATION ── */
+  .edu-list{gap:.5rem!important;margin-top:.8rem!important}
+  .edu-card{background:#f9f9fb!important;border:1px solid #ddd!important;padding:.8rem 1.1rem!important;transform:none!important;gap:1rem!important;break-inside:avoid}
+  .edu-yr{background:#e8f8f7!important;border-color:#0A8A80!important;color:#0A8A80!important;font-size:.6rem!important;min-width:60px!important}
+  .edu-deg{color:#1a1a2e!important;font-size:.88rem!important}
+  .edu-inst{color:#555!important;font-size:.65rem!important}
+  .edu-score{-webkit-text-fill-color:unset!important;color:#D4A843!important;background:none!important;font-size:1rem!important}
+  /* ── PERSONAL ── */
+  .p-grid{grid-template-columns:repeat(2,1fr)!important;gap:.5rem!important;margin-top:.8rem!important}
+  .p-card{background:#f9f9fb!important;border:1px solid #ddd!important;padding:.7rem .9rem!important;transform:none!important;break-inside:avoid}
+  .p-ico{background:#fff8e8!important;border-color:#D4A843!important;width:28px!important;height:28px!important;font-size:.8rem!important}
+  .p-lbl{color:#777!important;font-size:.58rem!important}
+  .p-val{color:#1a1a2e!important;font-size:.75rem!important}
+  .decl-box{background:#f9f9fb!important;border-color:#ddd!important;border-left-color:#D4A843!important;padding:.9rem 1.2rem!important;margin-top:.8rem!important}
+  .decl-text{color:#555!important;font-size:.75rem!important}
+  .decl-sig{color:#D4A843!important;font-size:.9rem!important}
+  /* ── FOOTER ── */
+  footer{background:#f0f4f8!important;padding:1rem 0!important;border-color:#D4A843!important}
+  .ft-name{color:#D4A843!important;font-size:1.1rem!important}
+  .ft-tag{color:#555!important;font-size:.6rem!important;margin-bottom:.8rem!important}
+  .ft-links{gap:.5rem!important;margin-bottom:.5rem!important}
+  .ft-links a{color:#555!important;border-color:#ddd!important;font-size:.65rem!important;padding:.2rem .6rem!important}
+  .ft-copy{color:#aaa!important;font-size:.55rem!important}
+  /* ── PAGE BREAKS ── */
+  .tl-entry,.cert-card,.edu-card,.flip-card,.p-card,.mcp-pkt{page-break-inside:avoid}
+  #skills,#certs,#awards,#education,#personal{page-break-before:auto}
+}
 </style>
 </head>
 <body>
@@ -346,6 +484,7 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   <button class="t-btn active" id="btn-dark" onclick="setTheme('dark')" title="Dark mode">&#127769;</button>
   <button class="t-btn" id="btn-elegant" onclick="setTheme('elegant')" title="Elegant mode">&#10024;</button>
   <button class="t-btn" id="btn-bright" onclick="setTheme('bright')" title="Bright mode">&#9728;</button>
+  <button class="t-btn" onclick="downloadPDF()" title="Download PDF" style="background:linear-gradient(135deg,#D4A843,#8B6914);border-color:#D4A843;color:#050D18;font-size:.75rem;font-weight:900">PDF</button>
   <span class="t-label">theme</span>
 </div>
 
@@ -361,7 +500,6 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
     <li><a href="#education">Education</a></li>
     <li><a href="#personal">Personal</a></li>
   </ul>
-  <a href="Rajeshkumar_Resume_ATS_Styled.docx" download class="nav-pill">&#x2B07; Download CV</a>
   <button class="hamburger" id="hbg" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-menu" id="mob">
@@ -372,7 +510,7 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   <a href="#awards" onclick="closeMob()">Awards</a>
   <a href="#education" onclick="closeMob()">Education</a>
   <a href="#personal" onclick="closeMob()">Personal</a>
-  <a href="Rajeshkumar_Resume_ATS_Styled.docx" download style="color:var(--gold)">&#x2B07; Download CV</a>
+  <a href="javascript:void(0)" onclick="downloadPDF();closeMob();" style="color:var(--gold)">&#8659; Download PDF</a>
 </div>
 
 <!-- HERO -->
@@ -697,7 +835,7 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
     <a href="mailto:l.rajeshkumar@outlook.com">&#9993; Email</a>
     <a href="https://linkedin.com/in/rajeshkumar-l" target="_blank" rel="noopener">&#128279; LinkedIn</a>
     <a href="https://credly.com/users/l.rajeshkumar" target="_blank" rel="noopener">&#127885; Credly</a>
-    <a href="Rajeshkumar_Resume_ATS_Styled.docx" download>&#x2B07; Download CV</a>
+    <a href="javascript:void(0)" onclick="downloadPDF()">&#8659; Download PDF</a>
   </div>
   <div class="ft-copy">&copy; 2025 Rajeshkumar Lakshmanan &middot; All rights reserved</div>
 </footer>
@@ -730,6 +868,50 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   if (elLive) elLive.textContent = expData.live;
   if (elBadge) elBadge.textContent = "✦ " + expData.badge + " ✦";
   if (elTag) elTag.textContent = expData.tag;
+
+  /* ── PDF DOWNLOAD ────────────────────────────────── */
+  window.downloadPDF = function() {
+    /* 1 — Force ALL scroll-reveal elements visible */
+    var rvEls = document.querySelectorAll(".rv");
+    for (var i = 0; i < rvEls.length; i++) rvEls[i].classList.add("show");
+
+    /* 2 — Fire all skill bars to full width */
+    var bars = document.querySelectorAll(".sk-fill");
+    for (var i = 0; i < bars.length; i++) {
+      bars[i].style.width = bars[i].getAttribute("data-w") + "%";
+    }
+
+    /* 3 — Force all MCP nodes visible */
+    var mboxes = document.querySelectorAll(".mcp-box");
+    for (var i = 0; i < mboxes.length; i++) {
+      mboxes[i].style.opacity = "1";
+      mboxes[i].style.transform = "translateY(0)";
+    }
+
+    /* 4 — Expand all hidden timeline details */
+    var extras = document.querySelectorAll(".tl-extra");
+    for (var i = 0; i < extras.length; i++) extras[i].classList.add("open");
+
+    /* 5 — Force hero animations done */
+    var heroEls = document.querySelectorAll(".mono-tag,.hero-left h1,.typewriter-wrap,.hero-exp-live,.hero-tags,.hero-contacts,.hero-right");
+    for (var i = 0; i < heroEls.length; i++) {
+      heroEls[i].style.opacity = "1";
+      heroEls[i].style.transform = "none";
+      heroEls[i].style.animation = "none";
+    }
+
+    /* 6 — Small delay so browser paints everything, then print */
+    var orig = document.title;
+    document.title = "Rajeshkumar_Lakshmanan_SAP_Resume";
+    setTimeout(function() {
+      window.print();
+      /* 7 — Restore after print dialog closes */
+      setTimeout(function() {
+        document.title = orig;
+        for (var j = 0; j < extras.length; j++) extras[j].classList.remove("open");
+      }, 3000);
+    }, 350);
+  };
 
   /* ── THEME ────────────────────────────────────────── */
   function setTheme(t) {
