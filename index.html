@@ -472,6 +472,97 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   #skills,#certs,#awards,#education,#personal{page-break-before:auto}
 }
 
+
+/* ===== MCP ARCHITECTURE DIAGRAM ============================== */
+.ad-wrap{background:#fff;border-radius:14px;padding:1.6rem;margin-top:2.5rem;box-shadow:0 8px 50px rgba(0,0,0,.4);font-family:'Outfit',sans-serif;color:#111827;overflow-x:auto}
+.ad-title-row{text-align:center;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:2px solid #e5e7eb}
+.ad-main-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#111827}
+.ad-sub-title{font-size:.9rem;color:#6b7280;font-style:italic;margin-top:.3rem}
+.ad-body{min-width:920px}
+/* TOP ROW */
+.ad-top{display:grid;grid-template-columns:118px 88px 1fr 95px 1fr 85px 138px;align-items:stretch;margin-bottom:.8rem}
+/* BOXES */
+.ad-box{border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s,transform .25s}
+.ad-box.adhl{transform:scale(1.02)}
+.ad-bh{font-weight:700;font-size:.7rem;padding:.4rem .5rem;text-align:center;color:#fff;line-height:1.3}
+.ad-bb{flex:1;padding:.6rem .5rem;display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.ad-icon{font-size:1.5rem;line-height:1}
+.ad-lbl{font-size:.7rem;color:#374151;text-align:center;line-height:1.3}
+.ad-sm{font-size:.6rem;color:#6b7280;text-align:center;line-height:1.4}
+.ad-sep{width:1px;height:14px;background:#d1d5db;margin:3px 0}
+.ad-bi{font-size:.9rem;color:#9ca3af;margin:2px 0}
+.ad-inner{width:100%;border-radius:5px;padding:.45rem .4rem;margin-top:.3rem}
+.ad-it{font-size:.67rem;font-weight:700;text-align:center;margin-bottom:.3rem;color:#374151;line-height:1.3}
+.ad-ul{margin:0;padding-left:.9rem;font-size:.6rem;color:#374151;line-height:1.65;list-style:disc}
+.ad-bi-arrow{font-size:.9rem;color:#6b7280;margin:2px 0}
+/* User */
+.ad-user{background:#eff6ff;border:2px solid #2563eb}
+.ad-user-h{background:#2563eb}
+.ad-box.ad-user.adhl{box-shadow:0 0 0 3px #2563eb,0 0 22px rgba(37,99,235,.3)}
+/* LLM App */
+.ad-llm{background:#faf5ff;border:2px solid #7c3aed}
+.ad-llm-h{background:#7c3aed}
+.ad-box.ad-llm.adhl{box-shadow:0 0 0 3px #7c3aed,0 0 22px rgba(124,58,237,.3)}
+.ad-llm-core,.ad-mcp-host,.ad-memory{background:#ede9fe;border:1px solid #a78bfa}
+/* LLM logos */
+.ad-logos{display:flex;gap:.35rem;justify-content:center;align-items:center;margin:.25rem 0}
+.logo-oai{font-size:.9rem;font-weight:900;color:#10a37f;border:1.5px solid #10a37f;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.7rem}
+.logo-ant{font-size:.7rem;font-weight:900;background:#d97706;color:#fff;padding:2px 5px;border-radius:4px;letter-spacing:.04em}
+.logo-meta{font-size:.9rem;color:#0668e1}
+/* MCP Server */
+.ad-mcp{background:#f0fdf4;border:2px solid #16a34a}
+.ad-mcp-h{background:#16a34a}
+.ad-box.ad-mcp.adhl{box-shadow:0 0 0 3px #16a34a,0 0 22px rgba(22,163,74,.3)}
+.ad-exposed,.ad-caps{background:#dcfce7;border:1px solid #86efac}
+/* SAP System */
+.ad-sap{background:#eff6ff;border:2px solid #1e40af}
+.ad-sap-h{background:#1e40af}
+.ad-box.ad-sap.adhl{box-shadow:0 0 0 3px #1e40af,0 0 22px rgba(30,64,175,.3)}
+.ad-integ{background:#dbeafe;border:1px solid #93c5fd}
+.ad-sap-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#fff;background:#1e40af;padding:.15rem .7rem;border-radius:4px;margin:.2rem 0;letter-spacing:.05em}
+/* CONNECTORS */
+.ad-conn{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.3rem;padding:.3rem .15rem;position:relative}
+.ad-conn-mid{gap:.25rem}
+.ad-arr{display:flex;align-items:center;width:100%;gap:.15rem;font-size:.58rem;color:#374151}
+.ad-right{flex-direction:row}
+.ad-left{flex-direction:row-reverse}
+.ad-num{font-size:.7rem;font-weight:700;background:#1e40af;color:#fff;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .2s}
+.ad-al{font-size:.55rem;color:#4b5563;text-align:center;line-height:1.3;max-width:60px;flex-shrink:0}
+.ad-line{flex:1;height:2px;background:#d1d5db;position:relative;overflow:visible;min-width:8px;transition:background .3s}
+.ad-arh{font-size:.6rem;color:#9ca3af;flex-shrink:0;transition:color .3s}
+/* Active arrow */
+.ad-arr.adact .ad-line{background:#2563eb}
+.ad-arr.adact .ad-arh{color:#2563eb}
+.ad-arr.adact .ad-num{background:#dc2626;transform:scale(1.2)}
+/* Packet animation */
+.ad-pkt{position:absolute;width:8px;height:8px;border-radius:50%;background:#3b82f6;top:50%;transform:translateY(-50%);left:0;opacity:0;box-shadow:0 0 6px #3b82f6}
+.ad-arr.adact .ad-pkt{animation:adPkt 0.9s ease-in-out infinite}
+.ad-pkt-l{right:0;left:auto}
+.ad-arr.adact .ad-pkt-l{animation:adPktL 0.9s ease-in-out infinite}
+@keyframes adPkt{0%{left:0;opacity:1}100%{left:100%;opacity:0}}
+@keyframes adPktL{0%{right:0;opacity:1}100%{right:100%;opacity:0}}
+/* MCP Connection box */
+.ad-mid-box{background:#dbeafe;border:2px dashed #2563eb;border-radius:6px;padding:.4rem .3rem;text-align:center;width:100%;font-size:.6rem;color:#1e40af;transition:box-shadow .3s}
+.ad-mid-box.adhl{box-shadow:0 0 0 2px #2563eb,0 0 14px rgba(37,99,235,.25)}
+/* CROSS CUTTING */
+.ad-cross{background:#eff6ff;border:2px dashed #2563eb;border-radius:8px;padding:.8rem 1rem;margin-bottom:.9rem;margin-left:206px;transition:box-shadow .3s}
+.ad-cross.adhl{box-shadow:0 0 0 3px #2563eb,0 0 18px rgba(37,99,235,.2)}
+.ad-cross-h{font-weight:700;font-size:.75rem;color:#1e40af;margin-bottom:.6rem}
+.ad-cross-items{display:flex;gap:.6rem;justify-content:space-around;flex-wrap:wrap}
+.ad-ci{display:flex;flex-direction:column;align-items:center;gap:.2rem;flex:1;min-width:90px;text-align:center}
+.ad-ci-icon{font-size:1.3rem}
+.ad-ci-t{font-size:.63rem;font-weight:700;color:#1e40af;line-height:1.3}
+/* BOTTOM */
+.ad-bottom{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ad-notes,.ad-flow-sum{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:8px;padding:.8rem 1rem}
+.ad-panel-t{font-weight:700;font-size:.78rem;color:#92400e;margin-bottom:.5rem}
+.ad-notes-ul{margin:0;padding-left:1rem;font-size:.65rem;color:#374151;line-height:1.75;list-style:disc}
+.ad-fs-list{margin:0;padding-left:1rem;font-size:.65rem;color:#374151;line-height:1.75}
+.ad-fs{transition:all .3s;border-radius:3px;padding:0 3px}
+.ad-fs.adhl{background:#fef3c7;font-weight:700;color:#92400e}
+/* Print */
+@media print{.ad-wrap{box-shadow:none;border:1px solid #e5e7eb;padding:.8rem}.ad-body{min-width:auto}.ad-arr.adact .ad-pkt,.ad-arr.adact .ad-pkt-l{animation:none}.ad-fs.adhl,.ad-mid-box.adhl,.ad-cross.adhl,.ad-box.adhl{box-shadow:none!important;transform:none!important}}
+
 </style>
 </head>
 <body>
@@ -693,88 +784,205 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   </div>
 </div></div></div>
 
-<!-- SAP + AI / MCP FLOW -->
-<div id="mcp"><div class="mcp-section">
-  <div class="mcp-inner">
-    <div class="s-mono rv">Innovation &amp; Future</div>
-    <h2 class="s-title rv">SAP + Claude AI &mdash; <span>MCP Enhancement</span></h2>
-    <p class="s-sub rv">How SAP systems connect with Claude LLM via the Model Context Protocol (MCP) to deliver intelligent automation &mdash; an architectural blueprint for AI-powered enterprise enhancement.</p>
-    <div class="mcp-flow rv" id="mcpFlow">
-      <!-- Node 1: SAP System -->
-      <div class="mcp-node">
-        <div class="mcp-box active-node">
-          <div class="mcp-tooltip">SAP ECC / S/4HANA&#10;exposes BAPIs, RFMs, OData</div>
-          <span class="mcp-icon">&#128241;</span>
-          <div class="mcp-label">SAP System</div>
-          <div class="mcp-sub">ECC / S/4HANA<br>BTP</div>
-        </div>
-      </div>
-      <!-- Arrow 1 -->
-      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
-      <!-- Node 2: MCP Server -->
-      <div class="mcp-node">
-        <div class="mcp-box">
-          <div class="mcp-tooltip">MCP Server bridges SAP&#10;APIs with AI context protocol</div>
-          <span class="mcp-icon">&#128279;</span>
-          <div class="mcp-label">MCP Server</div>
-          <div class="mcp-sub">SAP Connector<br>Tool Registry</div>
-        </div>
-      </div>
-      <!-- Arrow 2 -->
-      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
-      <!-- Node 3: Claude LLM -->
-      <div class="mcp-node">
-        <div class="mcp-box active-node">
-          <div class="mcp-tooltip">Claude LLM reasons over&#10;SAP data &amp; executes tools</div>
-          <span class="mcp-icon">&#129302;</span>
-          <div class="mcp-label">Claude LLM</div>
-          <div class="mcp-sub">Anthropic<br>claude-sonnet</div>
-        </div>
-      </div>
-      <!-- Arrow 3 -->
-      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
-      <!-- Node 4: Tool Execution -->
-      <div class="mcp-node">
-        <div class="mcp-box">
-          <div class="mcp-tooltip">Claude calls SAP tools&#10;via MCP protocol (JSON-RPC)</div>
-          <span class="mcp-icon">&#9881;</span>
-          <div class="mcp-label">Tool Call</div>
-          <div class="mcp-sub">BAPI / OData<br>RFC / CDS</div>
-        </div>
-      </div>
-      <!-- Arrow 4 -->
-      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
-      <!-- Node 5: Enhancement -->
-      <div class="mcp-node">
-        <div class="mcp-box">
-          <div class="mcp-tooltip">AI-generated ABAP code&#10;or automated process output</div>
-          <span class="mcp-icon">&#128161;</span>
-          <div class="mcp-label">Enhancement</div>
-          <div class="mcp-sub">Auto-ABAP<br>Smart Process</div>
-        </div>
-      </div>
-      <!-- Arrow 5 -->
-      <div class="mcp-conn"><div class="mcp-line"><div class="mcp-arrow"></div></div></div>
-      <!-- Node 6: SAP Output -->
-      <div class="mcp-node">
-        <div class="mcp-box active-node">
-          <div class="mcp-tooltip">Results flow back to SAP&#10;or end-user via Fiori / BTP</div>
-          <span class="mcp-icon">&#127919;</span>
-          <div class="mcp-label">SAP Output</div>
-          <div class="mcp-sub">Fiori / BTP<br>Automated</div>
-        </div>
-      </div>
+<!-- SAP + LLM / MCP ARCHITECTURE -->
+<div id="mcp"><div class="sec-wrap alt"><div class="sec-inner">
+  <div class="s-mono rv">Innovation &amp; Architecture</div>
+  <h2 class="s-title rv">SAP + LLM Integration &mdash; <span>MCP Architecture</span></h2>
+  <p class="s-sub rv">Complete high-level architecture: how SAP systems integrate with any LLM via the Model Context Protocol (MCP) to deliver intelligent enterprise automation.</p>
+
+  <div class="ad-wrap rv" id="archDiag">
+
+    <div class="ad-title-row">
+      <div class="ad-main-title">Integrating SAP with an LLM using MCP</div>
+      <div class="ad-sub-title">High Level Flow</div>
     </div>
-    <div class="mcp-packet rv">
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Natural language SAP queries via Claude</div>
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>AI-powered ABAP code generation</div>
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Intelligent BAPI / OData tool execution</div>
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>Automated S/4HANA migration assist</div>
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>SAP Build Process Automation + LLM</div>
-      <div class="mcp-pkt"><span class="mcp-pkt-dot"></span>HANA vector embeddings for semantic search</div>
-    </div>
-  </div>
-</div></div>
+
+    <div class="ad-body">
+
+      <!-- ── TOP ROW ────────────────────────────────── -->
+      <div class="ad-top">
+
+        <!-- BOX 1: User/Client -->
+        <div class="ad-box ad-user" id="adb-user">
+          <div class="ad-bh ad-user-h">1. User / Client</div>
+          <div class="ad-bb">
+            <div class="ad-icon">&#128100;</div>
+            <div class="ad-lbl">User</div>
+            <div class="ad-sep"></div>
+            <div class="ad-icon">&#128172;</div>
+            <div class="ad-lbl">Chat / UI<br/><span class="ad-sm">(Web, Teams, Slack, etc.)</span></div>
+          </div>
+        </div>
+
+        <!-- CONNECTOR 1 + 8 -->
+        <div class="ad-conn" id="adc-18">
+          <div class="ad-arr ad-right" data-step="1">
+            <span class="ad-num">&#10122;</span>
+            <div class="ad-al">User Question<br/>(Natural Language)</div>
+            <div class="ad-line"><div class="ad-pkt"></div></div>
+            <div class="ad-arh">&#9654;</div>
+          </div>
+          <div class="ad-arr ad-left" data-step="8">
+            <div class="ad-arh">&#9664;</div>
+            <div class="ad-line"><div class="ad-pkt ad-pkt-l"></div></div>
+            <div class="ad-al">LLM Response<br/>(Natural Language)</div>
+            <span class="ad-num">&#10129;</span>
+          </div>
+        </div>
+
+        <!-- BOX 2: LLM App -->
+        <div class="ad-box ad-llm" id="adb-llm">
+          <div class="ad-bh ad-llm-h">2. Orchestrator / LLM Application</div>
+          <div class="ad-bb">
+            <div class="ad-inner ad-llm-core" id="adb-llm-core">
+              <div class="ad-it">LLM (Any)</div>
+              <div class="ad-logos">
+                <span class="logo-oai">&#9711;</span>
+                <span class="logo-ant">AI</span>
+                <span class="logo-meta">&#9871;</span>
+              </div>
+              <div class="ad-sm" style="text-align:center;margin-top:3px">OpenAI / Anthropic / Meta / Any LLM</div>
+            </div>
+            <div class="ad-bi">&#8597;</div>
+            <div class="ad-inner ad-mcp-host" id="adb-mcp-host">
+              <div class="ad-it">MCP Host (Client)</div>
+            </div>
+            <div class="ad-bi">&#8597;</div>
+            <div class="ad-inner ad-memory" id="adb-memory">
+              <div class="ad-it">Conversation /<br/>Session Memory</div>
+              <div style="font-size:1.3rem;margin-top:4px">&#128451;</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONNECTOR 2 + 7 + MCP Connection box -->
+        <div class="ad-conn ad-conn-mid" id="adc-27">
+          <div class="ad-arr ad-right" data-step="2">
+            <span class="ad-num">&#10123;</span>
+            <div class="ad-al">MCP Request<br/>(Tool / Resource)</div>
+            <div class="ad-line"><div class="ad-pkt"></div></div>
+            <div class="ad-arh">&#9654;</div>
+          </div>
+          <div class="ad-mid-box" id="adb-mcp-conn">
+            <div class="ad-it" style="font-size:.68rem">MCP Connection<br/>(JSON-RPC 2.0)</div>
+            <div class="ad-sm">(STDIO / SSE / WebSocket)</div>
+          </div>
+          <div class="ad-arr ad-left" data-step="7">
+            <div class="ad-arh">&#9664;</div>
+            <div class="ad-line"><div class="ad-pkt ad-pkt-l"></div></div>
+            <div class="ad-al">MCP Response<br/>(Result / Data / Error)</div>
+            <span class="ad-num">&#10128;</span>
+          </div>
+        </div>
+
+        <!-- BOX 3: MCP Server -->
+        <div class="ad-box ad-mcp" id="adb-mcp">
+          <div class="ad-bh ad-mcp-h">3. MCP Server (SAP Connector)</div>
+          <div class="ad-bb">
+            <div style="font-size:1.6rem;margin-bottom:3px">&#9881;</div>
+            <div class="ad-lbl" style="font-weight:700;margin-bottom:6px">MCP Server</div>
+            <div class="ad-inner ad-exposed">
+              <div class="ad-it" style="color:#15803d">Exposed via MCP<br/>(Tools / Resources)</div>
+              <ul class="ad-ul">
+                <li>Read Sales Order</li>
+                <li>Create Sales Order</li>
+                <li>Get Customer</li>
+                <li>Get Material</li>
+                <li>Get Stock</li>
+                <li>&bull;&bull;&bull;</li>
+              </ul>
+            </div>
+            <div class="ad-inner ad-caps">
+              <div class="ad-it" style="color:#15803d">Capabilities</div>
+              <ul class="ad-ul">
+                <li>Tools (Actions)</li>
+                <li>Resources (Data)</li>
+                <li>Prompts (Optional)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONNECTOR 3 + 6 -->
+        <div class="ad-conn" id="adc-36">
+          <div class="ad-arr ad-right" data-step="3">
+            <span class="ad-num">&#10124;</span>
+            <div class="ad-al">SAP API Call<br/>(OData / RFC / BAPI)</div>
+            <div class="ad-line"><div class="ad-pkt"></div></div>
+            <div class="ad-arh">&#9654;</div>
+          </div>
+          <div class="ad-arr ad-left" data-step="6">
+            <div class="ad-arh">&#9664;</div>
+            <div class="ad-line"><div class="ad-pkt ad-pkt-l"></div></div>
+            <div class="ad-al">SAP Response<br/>(Data / Result)</div>
+            <span class="ad-num">&#10127;</span>
+          </div>
+        </div>
+
+        <!-- BOX 4: SAP System -->
+        <div class="ad-box ad-sap" id="adb-sap">
+          <div class="ad-bh ad-sap-h">4. SAP System</div>
+          <div class="ad-bb">
+            <div class="ad-sap-logo">SAP</div>
+            <div class="ad-lbl">SAP S/4HANA<br/>(or ECC)</div>
+            <div class="ad-inner ad-integ">
+              <div class="ad-it" style="color:#1d4ed8">Integration Options</div>
+              <ul class="ad-ul">
+                <li>OData Services</li>
+                <li>RFC / BAPIs</li>
+                <li>SOAP / REST APIs</li>
+                <li>CDS Views</li>
+              </ul>
+            </div>
+            <div style="font-size:1.3rem;margin-top:6px">&#128451;</div>
+            <div class="ad-sm" style="margin-top:2px">SAP Data</div>
+          </div>
+        </div>
+
+      </div><!-- /.ad-top -->
+
+      <!-- ── CROSS-CUTTING SERVICES ─────────────────── -->
+      <div class="ad-cross" id="adb-cross">
+        <div class="ad-cross-h">5. Cross-Cutting Services <span class="ad-sm">(Optional but Recommended)</span></div>
+        <div class="ad-cross-items">
+          <div class="ad-ci"><div class="ad-ci-icon">&#128274;</div><div class="ad-ci-t">Authentication &amp;<br/>Authorization</div><div class="ad-sm">(OAuth2 / SAML / SAP IAS)</div></div>
+          <div class="ad-ci"><div class="ad-ci-icon">&#128273;</div><div class="ad-ci-t">Secrets Management</div><div class="ad-sm">(API Keys / Credentials)</div></div>
+          <div class="ad-ci"><div class="ad-ci-icon">&#128203;</div><div class="ad-ci-t">Audit &amp; Logging</div><div class="ad-sm">(Requests, Responses, Users, Tools)</div></div>
+          <div class="ad-ci"><div class="ad-ci-icon">&#128200;</div><div class="ad-ci-t">Monitoring &amp;<br/>Observability</div><div class="ad-sm">&nbsp;</div></div>
+          <div class="ad-ci"><div class="ad-ci-icon">&#128737;</div><div class="ad-ci-t">Guardrails &amp;<br/>Content Safety</div><div class="ad-sm">&nbsp;</div></div>
+        </div>
+      </div>
+
+      <!-- ── BOTTOM: Notes + Flow Summary ─────────────── -->
+      <div class="ad-bottom">
+        <div class="ad-notes">
+          <div class="ad-panel-t">Notes</div>
+          <ul class="ad-notes-ul">
+            <li>MCP (Model Context Protocol) standardizes how the LLM application discovers and invokes tools/resources from external systems like SAP.</li>
+            <li>Use least-privilege users and secure all connections.</li>
+            <li>This setup works with any LLM that supports tool calling.</li>
+          </ul>
+        </div>
+        <div class="ad-flow-sum">
+          <div class="ad-panel-t">Flow Summary</div>
+          <ol class="ad-fs-list">
+            <li class="ad-fs" data-fs="1">User asks a question in natural language.</li>
+            <li class="ad-fs" data-fs="2">LLM decides to call a tool/resource via MCP.</li>
+            <li class="ad-fs" data-fs="3">MCP Server calls SAP using appropriate API.</li>
+            <li class="ad-fs" data-fs="4">SAP processes the request.</li>
+            <li class="ad-fs" data-fs="5">(implicit) Cross-cutting services apply (auth, logging, etc.).</li>
+            <li class="ad-fs" data-fs="6">SAP returns data to MCP Server.</li>
+            <li class="ad-fs" data-fs="7">MCP Server returns result to MCP Host.</li>
+            <li class="ad-fs" data-fs="8">LLM generates the final response to the user.</li>
+          </ol>
+        </div>
+      </div>
+
+    </div><!-- /.ad-body -->
+  </div><!-- /.ad-wrap -->
+
+</div></div></div>
+<!-- END MCP ARCHITECTURE -->
 
 <!-- CERTS -->
 <div id="certs"><div class="sec-wrap"><div class="sec-inner">
@@ -1189,6 +1397,41 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:3.5rem 
   setTimeout(checkMcp, 500);
 
 
+
+  /* ── MCP ARCHITECTURE ANIMATION ─────────────────── */
+  (function() {
+    var diag = document.getElementById("archDiag");
+    if (!diag) return;
+    var smap = {
+      1:{boxes:["adb-user","adb-llm"],          conn:["1"], cross:false, fs:1},
+      2:{boxes:["adb-llm","adb-mcp-conn","adb-mcp"], conn:["2"], cross:false, fs:2},
+      3:{boxes:["adb-mcp","adb-sap"],            conn:["3"], cross:false, fs:3},
+      4:{boxes:["adb-sap"],                      conn:[],    cross:false, fs:4},
+      5:{boxes:[],                               conn:[],    cross:true,  fs:5},
+      6:{boxes:["adb-sap","adb-mcp"],            conn:["6"], cross:false, fs:6},
+      7:{boxes:["adb-mcp","adb-mcp-host"],       conn:["7"], cross:false, fs:7},
+      8:{boxes:["adb-llm","adb-user"],           conn:["8"], cross:false, fs:8}
+    };
+    var step = 0, timer = null;
+    function clearAll() {
+      diag.querySelectorAll(".adhl,.adact").forEach(function(el){ el.classList.remove("adhl","adact"); });
+    }
+    function runStep(s) {
+      clearAll();
+      var c = smap[s]; if (!c) return;
+      c.boxes.forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.add("adhl"); });
+      c.conn.forEach(function(n){ diag.querySelectorAll('[data-step="'+n+'"]').forEach(function(el){ el.classList.add("adact"); }); });
+      if (c.cross) { var cx=document.getElementById("adb-cross"); if(cx) cx.classList.add("adhl"); }
+      diag.querySelectorAll(".ad-fs").forEach(function(el){ el.classList.remove("adhl"); });
+      var fsEl=diag.querySelector('[data-fs="'+c.fs+'"]'); if(fsEl) fsEl.classList.add("adhl");
+    }
+    function tick() { step = step>=8 ? 1 : step+1; runStep(step); timer=setTimeout(tick,2200); }
+    var obs = new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting){ obs.disconnect(); setTimeout(tick, 600); }
+    },{threshold:0.15});
+    obs.observe(diag);
+  })();
+  /* ── END MCP ANIMATION ──────────────────────────── */
 
 })();
 </script>
